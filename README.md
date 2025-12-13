@@ -1,4 +1,4 @@
-# Portfolio 2.0 - React Version
+# Portfolio 3.0 - React Version
 
 A modern, responsive portfolio website built with React, showcasing projects, skills, and experience.
 
