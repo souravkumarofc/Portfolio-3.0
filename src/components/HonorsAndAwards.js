@@ -1,0 +1,127 @@
+import React, { useState } from 'react';
+
+const HonorsAndAwards = () => {
+  const [imageError, setImageError] = useState(false);
+  
+  const award = {
+    title: 'ServiceNow Gen AI Hackathon 2024',
+    company: 'Capgemini',
+    achievement: 'Winner (1st Prize)',
+    description: 'Built an AI-based image recognition solution within ServiceNow to detect potholes and road damage from user-uploaded images. Automated intelligent ticket routing to relevant government departments.',
+    recognition: 'Recognized for innovation and cross-functional collaboration, delivering a real-world, client-aligned solution.',
+    tags: ['Hackathon', 'Gen AI', 'ServiceNow'],
+    certificateImage: '/images/service-now-certificate.png',
+    linkedInUrl: 'https://www.linkedin.com/feed/update/urn:li:activity:7210853851720036352/'
+  };
+
+  return (
+    <section id="honors-awards" className="py-16 bg-white px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+            🏆 Honors & Awards
+          </h2>
+          <div className="section-divider w-24 mx-auto mb-6"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {/* Left Container - Certificate Image */}
+          <div className="bg-gray-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden card-hover">
+            <a
+              href={award.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block cursor-pointer h-full"
+            >
+              <div className="p-4 h-full flex items-center justify-center bg-white">
+                {!imageError ? (
+                  <img
+                    src={award.certificateImage}
+                    alt={`${award.title} Certificate`}
+                    className="w-full h-auto object-contain max-h-[500px]"
+                    style={{ imageRendering: 'auto' }}
+                    onError={(e) => {
+                      console.error('Image failed to load:', award.certificateImage);
+                      setImageError(true);
+                    }}
+                    loading="eager"
+                  />
+                ) : (
+                  <div className="w-full bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 flex flex-col items-center justify-center p-8 text-center min-h-[300px] rounded-lg">
+                    <div className="w-24 h-24 mb-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center shadow-lg">
+                      <i className="fa-solid fa-trophy text-5xl text-purple-600"></i>
+                    </div>
+                    <p className="text-gray-800 font-bold text-base mb-2">Certificate</p>
+                    <p className="text-gray-600 text-sm mb-2">ServiceNow Gen AI Hackathon 2024</p>
+                    <p className="text-gray-500 text-xs">Image not found</p>
+                  </div>
+                )}
+              </div>
+            </a>
+          </div>
+
+          {/* Right Container - Award Details */}
+          <div className="bg-gray-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden card-hover">
+            <div className="p-6">
+              <div className="mb-4">
+                <h3 className="font-playfair font-bold text-2xl md:text-3xl text-gray-800 mb-2">
+                  {award.title}
+                </h3>
+                <p className="text-lg text-blue-700 font-semibold mb-2">
+                  {award.company}
+                </p>
+                <div className="inline-block px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold mb-4">
+                  🥇 {award.achievement}
+                </div>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <p className="text-gray-800 leading-relaxed font-medium mb-2">
+                    Project Highlights:
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    {award.description}
+                  </p>
+                </div>
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                  <p className="text-gray-700 leading-relaxed italic">
+                    {award.recognition}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-sm text-gray-600 mb-2 font-semibold">Technologies:</p>
+                <div className="flex flex-wrap gap-2">
+                  {award.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <a
+                href={award.linkedInUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 font-semibold"
+              >
+                <i className="fa-brands fa-linkedin"></i>
+                <span>View Achievement on LinkedIn</span>
+                <i className="fa-solid fa-external-link text-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HonorsAndAwards;
+
