@@ -101,18 +101,18 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  href="#skills"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a
                   href="#projects"
                   className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
                 >
                   Projects
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#skills"
+                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                >
+                  Skills
                 </a>
               </li>
               <li>
@@ -125,7 +125,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  href="/Sourav Kumar.pdf"
+                  href="/Sourav Kumar CV.pdf"
                   download
                   className="px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2"
                 >
@@ -213,20 +213,20 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="#skills"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Skills
-            </a>
-          </li>
-          <li>
-            <a
               href="#projects"
               className="block py-2 hover:text-accent transition-colors duration-300"
               onClick={closeMenu}
             >
               Projects
+            </a>
+          </li>
+          <li>
+            <a
+              href="#skills"
+              className="block py-2 hover:text-accent transition-colors duration-300"
+              onClick={closeMenu}
+            >
+              Skills
             </a>
           </li>
           <li>
@@ -240,7 +240,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="/Sourav Kumar.pdf"
+              href="/Sourav Kumar CV.pdf"
               download
               className="mt-4 px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2 justify-center"
             >

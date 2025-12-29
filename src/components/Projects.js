@@ -7,7 +7,7 @@ const Projects = () => {
       title: 'Chef Claude — AI-Powered Recipe Generator',
       description: 'A personal frontend project that generates custom recipes based on a list of ingredients using the OpenRouter AI API. Focuses on dynamic AI content generation, responsive design, and robust API handling.',
       tags: ['React', 'OpenRouter API', 'Netlify'],
-      codeLink: 'https://github.com/Souravkr01/ChefClaude',
+      codeLink: 'https://github.com/souravkumarofc/ChefClaude',
       demoLink: 'https://ai-chefclaude.netlify.app/'
     },
     {
@@ -15,7 +15,7 @@ const Projects = () => {
       title: 'Meme Generator — Web App',
       description: 'A dynamic meme generator built with React and JavaScript that fetches real-time meme templates from an API and allows users to add custom text, download, and share their creations. This project showcases dynamic API handling and DOM manipulation with a focus on a responsive UI.',
       tags: ['React', 'JavaScript', 'Netlify'],
-      codeLink: 'https://github.com/Souravkr01/MemeGenerator',
+      codeLink: 'https://github.com/souravkumarofc/MemeGenerator',
       demoLink: 'https://generate-trendingmemes.netlify.app/'
     },
     {
@@ -23,7 +23,7 @@ const Projects = () => {
       title: 'Roll Dice Tenzies — Interactive Game',
       description: 'An interactive dice game built with React.js that challenges players to roll all ten dice until they all show the same number. It features state management with React Hooks, component-based rendering, and accessibility features like keyboard focus and screen reader support for an improved UX.',
       tags: ['React.js', 'JavaScript', 'Component-Based Design'],
-      codeLink: 'https://github.com/Souravkr01/Tenzies',
+      codeLink: 'https://github.com/souravkumarofc/Tenzies',
       demoLink: 'https://rolldice-tenzies.netlify.app/'
     },
     {
@@ -31,7 +31,7 @@ const Projects = () => {
       title: 'Inventos — Inventory Management Software',
       description: 'A full-stack project designed as a manufacturing industry inventory management software. It was built using a combination of frontend technologies like HTML5, CSS, and JavaScript, with a Python/Django backend.',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'Django'],
-      codeLink: 'https://github.com/Souravkr01?tab=repositories',
+      codeLink: 'https://github.com/souravkumarofc?tab=repositories',
       demoLink: 'https://inventos.netlify.app/'
     },
     {
@@ -39,7 +39,7 @@ const Projects = () => {
       title: 'My Travel Journey — Portfolio Project',
       description: 'A personal portfolio-style project built with React that showcases a collection of travel destinations. This application demonstrates the use of React components for structuring content and dynamic rendering of data from a local JSON file. Book your next travel destination with "Travel Journey".',
       tags: ['React', 'JavaScript', 'Netlify'],
-      codeLink: 'https://github.com/Souravkr01/travel_journey',
+      codeLink: 'https://github.com/souravkumarofc/travel_journey',
       demoLink: 'https://travel-with-myjourney.netlify.app/'
     },
     {
@@ -47,7 +47,7 @@ const Projects = () => {
       title: 'Covid-19 — Data Tracker',
       description: 'A web application that provides a real-time tracking of COVID-19 data, with a focus on India. The project integrates with public APIs to display statistics on confirmed cases, recoveries, and deaths, and may include features related to vaccine registration, such as the Co-WIN platform.',
       tags: ['HTML', 'CSS', 'JavaScript', 'API Integration'],
-      codeLink: 'https://github.com/Souravkr01',
+      codeLink: 'https://github.com/souravkumarofc',
       demoLink: 'https://covid19-cowin.netlify.app/'
     }
   ];

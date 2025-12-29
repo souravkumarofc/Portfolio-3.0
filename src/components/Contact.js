@@ -214,7 +214,7 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/sourkumar/"
+                  href="https://www.linkedin.com/in/souravkumarofc/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
@@ -229,7 +229,7 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="https://github.com/Souravkr01/"
+                  href="https://github.com/souravkumarofc/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
@@ -241,6 +241,23 @@ const Contact = () => {
                     <p className="font-semibold">GitHub</p>
                     <p className="text-sm text-gray-600">
                       View my repositories
+                    </p>
+                  </div>
+                </a>
+
+                <a
+                  href="https://x.com/souravkumarofc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
+                >
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
+                    <i className="fa-brands fa-x-twitter text-purple-600"></i>
+                  </div>
+                  <div>
+                    <p className="font-semibold">X (Twitter)</p>
+                    <p className="text-sm text-gray-600">
+                      Tech thoughts & updates
                     </p>
                   </div>
                 </a>
