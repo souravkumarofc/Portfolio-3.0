@@ -161,8 +161,15 @@ const ParticleNetwork = () => {
       }
     };
 
-    // Animation loop
+    // Animation loop - optimized with visibility check
+    let isVisible = true;
     const animate = () => {
+      // Only animate if canvas is visible (performance optimization)
+      if (!isVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
@@ -175,6 +182,17 @@ const ParticleNetwork = () => {
       drawConnections();
 
       animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // Pause animation when section is not visible (performance optimization)
+    const handleVisibilityChange = () => {
+      const heroSection = canvas.closest('section');
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Pause if section is completely out of viewport
+        isVisible = !(rect.bottom < 0 || rect.top > windowHeight);
+      }
     };
 
     // Initialize - use a small delay to ensure DOM is ready
@@ -197,6 +215,18 @@ const ParticleNetwork = () => {
     }, 100);
 
     window.addEventListener('resize', () => resizeCanvas(true));
+    // Throttled scroll listener for visibility check
+    let scrollTicking = false;
+    const handleScroll = () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          handleVisibilityChange();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const heroSection = canvas.closest('section');
     if (heroSection) {
@@ -204,9 +234,13 @@ const ParticleNetwork = () => {
       heroSection.addEventListener('mouseleave', handleMouseLeave);
     }
 
+    // Initial visibility check
+    handleVisibilityChange();
+
     return () => {
       clearTimeout(timeoutId);
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('scroll', handleScroll);
       const heroSection = canvas.closest('section');
       if (heroSection) {
         heroSection.removeEventListener('mousemove', handleMouseMove);

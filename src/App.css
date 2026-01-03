@@ -1,5 +1,24 @@
 /* App-specific styles if needed */
 
+/* Performance optimizations for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+body {
+  /* Enable hardware acceleration for smoother scrolling */
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize sections for scroll performance */
+section {
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
 /* Chat Widget Animations */
 @keyframes slide-up {
   from {

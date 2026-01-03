@@ -18,19 +18,30 @@ function App() {
   useScrollReveal();
 
   useEffect(() => {
-    // Navbar shadow on scroll
+    // Navbar shadow on scroll - optimized with requestAnimationFrame
+    let ticking = false;
+    const navbar = document.querySelector('header');
+    
     const handleScroll = () => {
-      const navbar = document.querySelector('header');
-      if (navbar) {
-        if (window.scrollY > 10) {
-          navbar.classList.add('navbar-scrolled');
-        } else {
-          navbar.classList.remove('navbar-scrolled');
-        }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (navbar) {
+            if (window.scrollY > 10) {
+              navbar.classList.add('navbar-scrolled');
+            } else {
+              navbar.classList.remove('navbar-scrolled');
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

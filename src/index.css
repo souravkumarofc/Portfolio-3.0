@@ -17,17 +17,18 @@ section {
   scroll-margin-top: 80px;
 }
 
-/* Custom fade-in animation */
+/* Custom fade-in animation - optimized for performance */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(20px) translateZ(0); /* Hardware acceleration */
+  will-change: opacity, transform; /* Hint browser for optimization */
   animation: fadeInUp 1s ease-out forwards;
 }
 
 @keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: none;
+    transform: translateZ(0); /* Keep hardware acceleration */
   }
 }
 
