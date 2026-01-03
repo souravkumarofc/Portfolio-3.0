@@ -26,50 +26,66 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   const recognitionRef = useRef(null);
   const emojiPickerRef = useRef(null);
   const previousMessagesLengthRef = useRef(1); // Start with 1 for initial message
+  const audioContextRef = useRef(null);
+  const lastReplySoundTimeRef = useRef(0);
   const [transformOrigin, setTransformOrigin] = useState('center center');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Play smooth notification sound for chatbot replies
-  const playReplySound = () => {
-    try {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // Resume if suspended
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
+  // Get or create shared AudioContext
+  const getAudioContext = () => {
+    if (!audioContextRef.current) {
+      try {
+        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (error) {
+        devLog('Audio not supported');
+        return null;
       }
-      
-      // Create a pleasant, smooth two-tone notification
-      const frequencies = [800, 1000]; // Two-tone notification
-      const duration = 0.2;
+    }
+    // Resume context if suspended (required by some browsers)
+    if (audioContextRef.current.state === 'suspended') {
+      audioContextRef.current.resume();
+    }
+    return audioContextRef.current;
+  };
+
+  // Play cute, smooth notification sound for chatbot replies
+  const playReplySound = () => {
+    const now = Date.now();
+    // Prevent overlapping sounds (minimum 200ms gap for replies)
+    if (now - lastReplySoundTimeRef.current < 200) return;
+    lastReplySoundTimeRef.current = now;
+
+    try {
+      const audioContext = getAudioContext();
+      if (!audioContext) return;
+
+      // Create a cute, pleasant single-tone notification (like a gentle bell)
+      // Using a sweet, pleasant frequency
+      const frequency = 880; // A5 - pleasant and not harsh
+      const duration = 0.18;
       const baseTime = audioContext.currentTime;
+
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
       
-      frequencies.forEach((freq, index) => {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = freq;
-        oscillator.type = 'sine'; // Smooth sine wave
-        
-        const startTime = baseTime + (index * 0.08);
-        const endTime = startTime + duration;
-        
-        // Smooth envelope
-        gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.02);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, endTime);
-        
-        oscillator.start(startTime);
-        oscillator.stop(endTime);
-      });
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = frequency;
+      oscillator.type = 'sine'; // Smooth sine wave
+      
+      // Very smooth envelope: quick gentle rise, smooth fade out
+      gainNode.gain.setValueAtTime(0, baseTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, baseTime + 0.02); // Gentle volume
+      gainNode.gain.exponentialRampToValueAtTime(0.001, baseTime + duration); // Smooth fade out
+      
+      oscillator.start(baseTime);
+      oscillator.stop(baseTime + duration);
     } catch (error) {
-      devLog('Audio not supported');
+      devLog('Audio error:', error);
     }
   };
 
