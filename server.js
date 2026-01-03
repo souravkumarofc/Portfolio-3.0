@@ -261,16 +261,12 @@ function fuzzyMatch(text, pattern) {
 }
 
 // Check if question matches local data keywords
-// NOTE: We're being VERY restrictive - only use local data for the most basic single-word queries
-// Let Gemini handle everything else so it can understand context, intent, and provide real AI responses
+// Improved to handle common question patterns for better user experience
 function shouldUseLocalData(question) {
   const lowerQuestion = question.toLowerCase().trim();
   const trimmedLower = lowerQuestion.trim();
   
-  // ONLY use local data for very simple, single-word queries to save quota
-  // For everything else, let Gemini understand the context and provide intelligent responses
-  
-  // Very basic single-word queries only
+  // Exact single-word matches (highest priority)
   if (trimmedLower === 'project' || trimmedLower === 'projects') {
     if (LOCAL_ANSWERS.projects) {
       devLog('📦 Matched basic projects query:', question);
@@ -292,9 +288,73 @@ function shouldUseLocalData(question) {
     }
   }
   
+  // Common question patterns for skills
+  const skillsPatterns = [
+    'skill', 'skills', 'technology', 'technologies', 'tech stack', 
+    'what can he do', 'what does he know', 'what technologies',
+    'what are his skills', 'tell me about skills', 'show me skills',
+    'his skills', 'his skill', 'technical skills', 'tech skills'
+  ];
+  if (skillsPatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    if (LOCAL_ANSWERS.skills) {
+      devLog('📦 Matched skills pattern query:', question);
+      return { useLocal: true, answer: LOCAL_ANSWERS.skills.answer };
+    }
+  }
+  
+  // Common question patterns for projects
+  const projectsPatterns = [
+    'project', 'projects', 'work', 'works', 'built', 'created',
+    'what are his projects', 'tell me about projects', 'show me projects',
+    'his projects', 'his project', 'featured projects', 'portfolio projects'
+  ];
+  if (projectsPatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    if (LOCAL_ANSWERS.projects) {
+      devLog('📦 Matched projects pattern query:', question);
+      return { useLocal: true, answer: LOCAL_ANSWERS.projects.answer };
+    }
+  }
+  
+  // Common question patterns for experience
+  const experiencePatterns = [
+    'experience', 'work experience', 'job', 'employment', 'career',
+    'where does he work', 'where working', 'which company', 'current company',
+    'tell me about experience', 'work history', 'employment history',
+    'his experience', 'his work', 'professional experience'
+  ];
+  if (experiencePatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    if (LOCAL_ANSWERS.experience) {
+      devLog('📦 Matched experience pattern query:', question);
+      return { useLocal: true, answer: LOCAL_ANSWERS.experience.answer };
+    }
+  }
+  
+  // Education patterns
+  const educationPatterns = [
+    'education', 'degree', 'qualification', 'university', 'college',
+    'btech', 'b.tech', 'graduation', 'where did he study', 'his education'
+  ];
+  if (educationPatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    if (LOCAL_ANSWERS.education) {
+      devLog('📦 Matched education pattern query:', question);
+      return { useLocal: true, answer: LOCAL_ANSWERS.education.answer };
+    }
+  }
+  
+  // Resume patterns
+  const resumePatterns = [
+    'resume', 'cv', 'curriculum vitae', 'download resume', 'get resume'
+  ];
+  if (resumePatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    if (LOCAL_ANSWERS.resume) {
+      devLog('📦 Matched resume pattern query:', question);
+      return { useLocal: true, answer: LOCAL_ANSWERS.resume.answer };
+    }
+  }
+  
   // Simple greetings only (no portfolio keywords)
-  const greetingKeywords = ['hi', 'hello', 'hey'];
-  if (greetingKeywords.includes(trimmedLower)) {
+  const greetingKeywords = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
+  if (greetingKeywords.some(keyword => trimmedLower === keyword || trimmedLower.startsWith(keyword + ' '))) {
     const portfolioKeywords = ['skill', 'project', 'experience', 'education', 'resume', 'sourav', 'portfolio'];
     const hasPortfolioKeyword = portfolioKeywords.some(word => lowerQuestion.includes(word));
     if (!hasPortfolioKeyword) {
@@ -303,13 +363,12 @@ function shouldUseLocalData(question) {
     }
   }
   
-  // For everything else, let Gemini handle it with real AI understanding
+  // For complex/analytical questions, let Gemini handle it
   // This includes:
-  // - Questions with context ("What are Sourav's skills?", "Tell me about his projects")
-  // - Analytical questions ("How many skills?", "What's his best project?")
-  // - Conversational queries ("What can he do?", "Where does he work?")
-  // - Questions with typos or variations
-  // - Any question that needs understanding beyond keyword matching
+  // - "How many skills?" (analytical)
+  // - "What's his best project?" (subjective)
+  // - "What can he help with?" (requires reasoning)
+  // - Questions requiring calculations or comparisons
   
   devLog('🤖 Sending to Gemini for AI understanding:', question);
   return { useLocal: false };
