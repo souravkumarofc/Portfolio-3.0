@@ -285,10 +285,15 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   // Client-side local data for offline/fallback responses
   const getLocalAnswer = (question) => {
     const lowerQuestion = question.toLowerCase().trim();
+    devLog('🔍 Checking local answer for:', question, '→', lowerQuestion);
     
-    // Greetings
+    // Greetings - but skip if question contains portfolio keywords
     const greetingKeywords = ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'];
-    if (greetingKeywords.some(keyword => lowerQuestion.includes(keyword))) {
+    const portfolioKeywords = ['skill', 'project', 'experience', 'education', 'resume', 'sourav', 'portfolio', 'frontend', 'work', 'job'];
+    const hasPortfolioKeyword = portfolioKeywords.some(word => lowerQuestion.includes(word));
+    
+    if (greetingKeywords.some(keyword => lowerQuestion.includes(keyword)) && !hasPortfolioKeyword) {
+      devLog('✅ Matched greeting');
       return "Hello! I'm here to help you learn about Sourav Kumar's portfolio. You can ask me about:\n- His technical skills\n- His projects\n- His work experience\n- His frontend development expertise\n\nWhat would you like to know?";
     }
     
@@ -358,7 +363,9 @@ Tools & Platforms:
       'frontend experience', 'frontend work', 'react experience', 'development experience',
       'what\'s his experience', 'what is his experience', 'tell me his experience'
     ];
-    if (experiencePatterns.some(pattern => lowerQuestion.includes(pattern))) {
+    const matchedExperiencePattern = experiencePatterns.find(pattern => lowerQuestion.includes(pattern));
+    if (matchedExperiencePattern) {
+      devLog('✅ Matched experience pattern:', matchedExperiencePattern);
       return `Sourav's work experience:
 
 Software Developer — Aimleap (Oct 2025 – Present)
@@ -429,6 +436,7 @@ Key highlights:
       return `Sourav has over ${years} years of professional experience (since June 2020). He is currently working as a Software Developer at Aimleap (Oct 2025-Present). Previously, he worked at Capgemini as an Analyst (Dec 2022-Oct 2025), Worksbot as Full Stack Developer (Jan 2022-Mar 2022), and Lyearn as Frontend Developer (Jun 2020-Mar 2021).`;
     }
     
+    devLog('❌ No local match found for:', question);
     return null; // No local match found
   };
 
