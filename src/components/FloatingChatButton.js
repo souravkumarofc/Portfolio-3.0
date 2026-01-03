@@ -6,7 +6,6 @@ const devLog = (...args) => { if (isDev) console.log(...args); };
 
 const FloatingChatButton = ({ onClick, isOpen }) => {
   const [imageError, setImageError] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
   // Play cute pop sound
@@ -71,12 +70,6 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
     playPopSound(600, 0.12);
   };
 
-  // Pulse animation on mount (only for logo)
-  useEffect(() => {
-    setIsAnimating(true);
-    const timer = setTimeout(() => setIsAnimating(false), 600);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Reset hover state when chat closes
   useEffect(() => {

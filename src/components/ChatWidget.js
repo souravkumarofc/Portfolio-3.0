@@ -19,7 +19,6 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   const [imageError, setImageError] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [interimTranscript, setInterimTranscript] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const debounceTimerRef = useRef(null);
@@ -641,7 +640,6 @@ Key highlights:
                     
                     recognition.onstart = () => {
                       setIsListening(true);
-                      setInterimTranscript('');
                       accumulatedFinalText = '';
                       devLog('Voice recognition started');
                     };
@@ -666,7 +664,6 @@ Key highlights:
                       // Accumulate final text (avoid duplicates)
                       if (finalText) {
                         accumulatedFinalText += finalText;
-                        setInterimTranscript(''); // Clear interim when we get final
                       }
                       
                       // Update input: accumulated final + current interim (no base text manipulation)
@@ -674,13 +671,6 @@ Key highlights:
                         const combined = (accumulatedFinalText.trim() + ' ' + interimText).trim();
                         return combined;
                       });
-                      
-                      // Store current interim for next update
-                      if (interimText) {
-                        setInterimTranscript(interimText);
-                      } else {
-                        setInterimTranscript('');
-                      }
                       
                       // Focus and move cursor to end
                       setTimeout(() => {
@@ -695,7 +685,6 @@ Key highlights:
                     recognition.onerror = (event) => {
                       devLog('Voice recognition error:', event.error);
                       setIsListening(false);
-                      setInterimTranscript('');
                       recognitionRef.current = null;
                       
                       // Handle specific errors
@@ -712,7 +701,6 @@ Key highlights:
                     
                     recognition.onend = () => {
                       setIsListening(false);
-                      setInterimTranscript('');
                       recognitionRef.current = null;
                     };
                     
