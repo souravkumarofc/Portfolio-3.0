@@ -168,7 +168,7 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
           setIsHovering(false);
         }
       }}
-      className={`fixed right-4 sm:right-6 md:right-10 z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible chat-button-responsive focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
+      className={`fixed right-4 sm:right-6 md:right-10 bottom-4 sm:bottom-6 md:bottom-10 z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible chat-button-responsive focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
       aria-label={isOpen ? 'Close chat' : 'Open AI chat assistant'}
     >
       <div className="relative w-full h-full flex items-center justify-center">
@@ -187,10 +187,10 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
               isHovering ? 'animate-hover-bounce' : 'animate-smooth-bounce'
             }`}
             style={{
-              width: '88px',
-              height: '88px',
-              marginTop: '-6px',
-              marginLeft: '-6px',
+              width: '110px',
+              height: '110px',
+              marginTop: '-10px',
+              marginLeft: '-10px',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               MozUserSelect: 'none',
