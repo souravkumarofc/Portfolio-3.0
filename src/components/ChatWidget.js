@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 // Only log in development
 const isDev = process.env.NODE_ENV === 'development';
@@ -52,7 +52,7 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   };
 
   // Play cute, smooth notification sound for chatbot replies
-  const playReplySound = () => {
+  const playReplySound = useCallback(() => {
     const now = Date.now();
     // Prevent overlapping sounds (minimum 200ms gap for replies)
     if (now - lastReplySoundTimeRef.current < 200) return;
@@ -87,7 +87,7 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
     } catch (error) {
       devLog('Audio error:', error);
     }
-  };
+  }, []); // Empty deps - function doesn't depend on any props/state
 
   // Play smooth close sound (gentle descending tone)
   const playCloseSound = () => {
@@ -142,7 +142,7 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
       }
       previousMessagesLengthRef.current = messages.length;
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, playReplySound]);
 
   const handleClose = () => {
     playCloseSound();
