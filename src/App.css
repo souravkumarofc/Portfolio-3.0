@@ -8,7 +8,7 @@ html {
 
 body {
   /* Enable hardware acceleration for smoother scrolling */
-  transform: translateZ(0);
+  /* Removed transform: translateZ(0) as it creates new containing block for fixed elements */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
