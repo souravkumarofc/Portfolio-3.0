@@ -32,14 +32,20 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Play high-quality notification sound for chatbot replies
+  // Play smooth notification sound for chatbot replies
   const playReplySound = () => {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       
-      // Create a pleasant notification sound (like iOS notification)
+      // Resume if suspended
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      
+      // Create a pleasant, smooth two-tone notification
       const frequencies = [800, 1000]; // Two-tone notification
       const duration = 0.2;
+      const baseTime = audioContext.currentTime;
       
       frequencies.forEach((freq, index) => {
         const oscillator = audioContext.createOscillator();
@@ -49,14 +55,15 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
         gainNode.connect(audioContext.destination);
         
         oscillator.frequency.value = freq;
-        oscillator.type = 'sine';
+        oscillator.type = 'sine'; // Smooth sine wave
         
-        const startTime = audioContext.currentTime + (index * 0.08);
+        const startTime = baseTime + (index * 0.08);
         const endTime = startTime + duration;
         
+        // Smooth envelope
         gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(0.2, startTime + 0.02);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, endTime);
+        gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, endTime);
         
         oscillator.start(startTime);
         oscillator.stop(endTime);
@@ -66,24 +73,34 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
     }
   };
 
-  // Play close sound
+  // Play smooth close sound (gentle descending tone)
   const playCloseSound = () => {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Resume if suspended
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
       
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
       
-      oscillator.frequency.value = 600;
+      // Gentle descending tone
+      oscillator.frequency.setValueAtTime(550, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.15);
       oscillator.type = 'sine';
       
-      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.12);
+      // Smooth envelope
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
       
       oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.12);
+      oscillator.stop(audioContext.currentTime + 0.15);
     } catch (error) {
       devLog('Audio not supported');
     }

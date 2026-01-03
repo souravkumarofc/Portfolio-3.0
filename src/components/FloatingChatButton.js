@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Only log in development
 const isDev = process.env.NODE_ENV === 'development';
@@ -7,11 +7,111 @@ const devLog = (...args) => { if (isDev) console.log(...args); };
 const FloatingChatButton = ({ onClick, isOpen }) => {
   const [imageError, setImageError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const audioContextRef = useRef(null);
+  const lastSoundTimeRef = useRef(0);
 
-  // Play cute pop sound
-  const playPopSound = (frequency = 800, duration = 0.15) => {
+  // Get or create shared AudioContext
+  const getAudioContext = () => {
+    if (!audioContextRef.current) {
+      try {
+        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (error) {
+        devLog('Audio not supported');
+        return null;
+      }
+    }
+    // Resume context if suspended (required by some browsers)
+    if (audioContextRef.current.state === 'suspended') {
+      audioContextRef.current.resume();
+    }
+    return audioContextRef.current;
+  };
+
+  // Play smooth, cute opening sound (gentle bell-like chime)
+  const playCuteOpeningSound = () => {
+    const now = Date.now();
+    // Prevent overlapping sounds (minimum 100ms gap)
+    if (now - lastSoundTimeRef.current < 100) return;
+    lastSoundTimeRef.current = now;
+
     try {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const audioContext = getAudioContext();
+      if (!audioContext) return;
+
+      // Create a smooth, pleasant ascending chime (like a notification)
+      const frequencies = [523.25, 659.25]; // C5, E5 - pleasant two-tone
+      const duration = 0.25;
+      const baseTime = audioContext.currentTime;
+
+      frequencies.forEach((freq, index) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = freq;
+        oscillator.type = 'sine'; // Smooth sine wave
+        
+        const startTime = baseTime + (index * 0.06);
+        const endTime = startTime + duration;
+        
+        // Smooth envelope: fade in quickly, fade out gently
+        gainNode.gain.setValueAtTime(0, startTime);
+        gainNode.gain.linearRampToValueAtTime(0.12, startTime + 0.03); // Gentle volume
+        gainNode.gain.exponentialRampToValueAtTime(0.001, endTime); // Smooth fade out
+        
+        oscillator.start(startTime);
+        oscillator.stop(endTime);
+      });
+    } catch (error) {
+      devLog('Audio error:', error);
+    }
+  };
+
+  // Play smooth closing sound (gentle descending tone)
+  const playCloseSound = () => {
+    const now = Date.now();
+    if (now - lastSoundTimeRef.current < 100) return;
+    lastSoundTimeRef.current = now;
+
+    try {
+      const audioContext = getAudioContext();
+      if (!audioContext) return;
+
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Gentle descending tone
+      oscillator.frequency.setValueAtTime(550, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.15);
+      oscillator.type = 'sine';
+      
+      // Smooth envelope
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.15);
+    } catch (error) {
+      devLog('Audio error:', error);
+    }
+  };
+
+  // Play subtle hover sound
+  const playPopSound = (frequency = 750, duration = 0.1) => {
+    const now = Date.now();
+    if (now - lastSoundTimeRef.current < 150) return;
+    lastSoundTimeRef.current = now;
+
+    try {
+      const audioContext = getAudioContext();
+      if (!audioContext) return;
+
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
       
@@ -21,53 +121,16 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
       oscillator.frequency.value = frequency;
       oscillator.type = 'sine';
       
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+      // Very gentle envelope for hover
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
       
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + duration);
     } catch (error) {
-      devLog('Audio not supported');
+      devLog('Audio error:', error);
     }
-  };
-
-  // Play cute opening sound (like a chime/bell)
-  const playCuteOpeningSound = () => {
-    try {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // Create a pleasant chime with multiple tones
-      const frequencies = [523.25, 659.25, 783.99]; // C, E, G (C major chord)
-      const duration = 0.3;
-      
-      frequencies.forEach((freq, index) => {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = freq;
-        oscillator.type = 'sine';
-        
-        const startTime = audioContext.currentTime + (index * 0.05);
-        const endTime = startTime + duration;
-        
-        gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.05);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, endTime);
-        
-        oscillator.start(startTime);
-        oscillator.stop(endTime);
-      });
-    } catch (error) {
-      devLog('Audio not supported');
-    }
-  };
-
-  // Play close sound (lower pitch)
-  const playCloseSound = () => {
-    playPopSound(600, 0.12);
   };
 
 
