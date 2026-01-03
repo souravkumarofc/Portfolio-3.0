@@ -414,6 +414,9 @@ section {
   right: 1rem !important;
   top: auto !important;
   left: auto !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  transform: none !important;
   transition: bottom 0.3s ease-out, transform 0.3s ease-out;
   /* Remove all focus and active state visuals */
   outline: none !important;
@@ -450,6 +453,9 @@ section {
     position: fixed !important;
     top: auto !important;
     left: auto !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    transform: none !important;
   }
 }
 
@@ -460,6 +466,9 @@ section {
     position: fixed !important;
     top: auto !important;
     left: auto !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    transform: none !important;
   }
 }
 

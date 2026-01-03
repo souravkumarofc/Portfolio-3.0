@@ -170,6 +170,14 @@ const FloatingChatButton = forwardRef(({ onClick, isOpen }, ref) => {
         }
       }}
       className={`chat-button-responsive z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
+      style={{
+        position: 'fixed',
+        bottom: '1rem',
+        right: '1rem',
+        top: 'auto',
+        left: 'auto',
+        zIndex: 9999
+      }}
       aria-label={isOpen ? 'Close chat' : 'Open AI chat assistant'}
     >
       <div className="relative w-full h-full flex items-center justify-center">
