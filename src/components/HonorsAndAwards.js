@@ -38,13 +38,22 @@ const HonorsAndAwards = () => {
                   <img
                     src={award.certificateImage}
                     alt={`${award.title} Certificate`}
+                    draggable="false"
+                    loading="lazy"
                     className="w-full h-auto object-contain max-h-[500px]"
-                    style={{ imageRendering: 'auto' }}
+                    style={{ 
+                      imageRendering: 'auto',
+                      userSelect: 'none',
+                      WebkitUserSelect: 'none',
+                      MozUserSelect: 'none',
+                      msUserSelect: 'none'
+                    }}
                     onError={(e) => {
-                      console.error('Image failed to load:', award.certificateImage);
+                      devError('Image failed to load:', award.certificateImage);
                       setImageError(true);
                     }}
-                    loading="eager"
+                    onDragStart={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 ) : (
                   <div className="w-full bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900/30 dark:via-blue-900/30 dark:to-indigo-900/30 flex flex-col items-center justify-center p-8 text-center min-h-[300px] rounded-lg">

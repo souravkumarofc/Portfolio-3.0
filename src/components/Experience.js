@@ -84,8 +84,19 @@ const Experience = () => {
                 <img
                   src={exp.logo}
                   alt={`${exp.title.split('—')[1]?.trim() || 'Company'} logo`}
+                  draggable="false"
+                  loading="lazy"
                   className="w-full h-full object-contain"
-                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                  style={{ 
+                    maxWidth: '100%', 
+                    maxHeight: '100%',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    MozUserSelect: 'none',
+                    msUserSelect: 'none'
+                  }}
+                  onDragStart={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
                 />
               </div>
               <div>

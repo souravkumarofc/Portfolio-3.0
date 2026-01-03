@@ -119,6 +119,7 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
           <img 
             src="/images/chatbot.png" 
             alt="Chat" 
+            draggable="false"
             className={`rounded-full object-cover logo-3d absolute transition-all duration-300 ease-out ${
               isHovering ? 'animate-hover-bounce' : 'animate-smooth-bounce'
             }`}
@@ -126,9 +127,17 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
               width: '88px',
               height: '88px',
               marginTop: '-6px',
-              marginLeft: '-6px'
+              marginLeft: '-6px',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              MozUserSelect: 'none',
+              msUserSelect: 'none',
+              pointerEvents: 'none'
             }}
             onError={() => setImageError(true)}
+            onDragStart={(e) => e.preventDefault()}
+            onContextMenu={(e) => e.preventDefault()}
+            loading="eager"
           />
         )}
       </div>

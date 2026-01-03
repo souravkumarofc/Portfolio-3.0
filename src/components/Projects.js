@@ -76,7 +76,21 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  draggable="false"
+                  loading="lazy"
                   className="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
+                  style={{
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    MozUserSelect: 'none',
+                    msUserSelect: 'none'
+                  }}
+                  onDragStart={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-purple-600 dark:text-purple-400"><i class="fa-solid fa-image text-4xl"></i></div>';
+                  }}
                 />
               </div>
               <div className="p-6">

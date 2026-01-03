@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ParticleNetwork from './ParticleNetwork';
 
+// Only log in development
+const isDev = process.env.NODE_ENV === 'development';
+const devLog = (...args) => { if (isDev) console.log(...args); };
+const devError = (...args) => { if (isDev) console.error(...args); };
+
 const Hero = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -25,7 +30,7 @@ const Hero = () => {
     };
     
     img.onerror = () => {
-      console.error('Failed to load image: /images/new_pic.png');
+      devError('Failed to load image: /images/new_pic.png');
       if (mounted && !hasLoaded) {
         hasLoaded = true;
         setImageError(true);
@@ -97,7 +102,7 @@ const Hero = () => {
       <ParticleNetwork />
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 dark:from-purple-500/10 to-transparent"></div>
       <div className="relative z-10 text-center max-w-4xl mx-auto">
-        <div className="mx-auto mb-8 image-container" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
+        <div className="mx-auto mb-8 image-container" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', position: 'relative' }}>
           <div
             className={`w-72 h-72 md:w-96 md:h-96 lg:w-[32rem] lg:h-[32rem] mx-auto transition-all duration-1200 ease-out relative`}
             style={{
@@ -126,8 +131,10 @@ const Hero = () => {
               src="/images/new_pic.png"
               alt="Sourav Kumar"
               draggable="false"
+              loading="eager"
+              fetchPriority="high"
               onLoad={(e) => {
-                console.log('Image loaded successfully via onLoad');
+                devLog('Image loaded successfully via onLoad');
                 // Check if image is actually loaded
                 if (e.target.complete && e.target.naturalHeight !== 0) {
                   setImageLoaded(true);
@@ -135,7 +142,7 @@ const Hero = () => {
                 }
               }}
               onError={(e) => {
-                console.error('Image failed to load:', e);
+                devError('Image failed to load:', e);
                 setImageError(true);
                 setImageLoaded(true);
               }}

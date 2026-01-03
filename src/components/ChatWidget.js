@@ -486,8 +486,19 @@ Key highlights:
             <img 
               src="/images/chatbot.png" 
               alt="AI Assistant" 
+              draggable="false"
               className="w-10 h-10 rounded-full object-cover"
+              style={{
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none',
+                pointerEvents: 'none'
+              }}
               onError={() => setImageError(true)}
+              onDragStart={(e) => e.preventDefault()}
+              onContextMenu={(e) => e.preventDefault()}
+              loading="eager"
             />
           )}
           <h3 className="font-semibold text-gray-900 dark:text-white text-base">Portfolio Assistant</h3>
