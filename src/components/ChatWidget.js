@@ -349,8 +349,16 @@ Tools & Platforms:
 - Demo: https://covid19-cowin.netlify.app/`;
     }
     
-    // Experience
-    if (lowerQuestion.includes('experience') || lowerQuestion.includes('work') || lowerQuestion.includes('job') || lowerQuestion.includes('career')) {
+    // Experience - improved pattern matching
+    const experiencePatterns = [
+      'experience', 'work experience', 'job', 'employment', 'career',
+      'where does he work', 'where working', 'which company', 'current company',
+      'tell me about experience', 'work history', 'employment history',
+      'his experience', 'his work', 'professional experience',
+      'frontend experience', 'frontend work', 'react experience', 'development experience',
+      'what\'s his experience', 'what is his experience', 'tell me his experience'
+    ];
+    if (experiencePatterns.some(pattern => lowerQuestion.includes(pattern))) {
       return `Sourav's work experience:
 
 Software Developer — Aimleap (Oct 2025 – Present)
