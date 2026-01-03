@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 
 // Only log in development
 const isDev = process.env.NODE_ENV === 'development';
 const devLog = (...args) => { if (isDev) console.log(...args); };
 
-const FloatingChatButton = ({ onClick, isOpen }) => {
+const FloatingChatButton = forwardRef(({ onClick, isOpen }, ref) => {
   const [imageError, setImageError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const audioContextRef = useRef(null);
@@ -156,6 +156,7 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
 
   return (
     <button
+      ref={ref}
       onClick={handleClick}
       onMouseEnter={() => {
         if (!isOpen) {
@@ -168,7 +169,7 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
           setIsHovering(false);
         }
       }}
-      className={`fixed right-4 sm:right-6 md:right-10 bottom-4 sm:bottom-6 md:bottom-10 z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible chat-button-responsive focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
+      className={`chat-button-responsive z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
       aria-label={isOpen ? 'Close chat' : 'Open AI chat assistant'}
     >
       <div className="relative w-full h-full flex items-center justify-center">
@@ -206,7 +207,9 @@ const FloatingChatButton = ({ onClick, isOpen }) => {
       </div>
     </button>
   );
-};
+});
+
+FloatingChatButton.displayName = 'FloatingChatButton';
 
 export default FloatingChatButton;
 

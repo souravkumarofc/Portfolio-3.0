@@ -52,9 +52,11 @@ const AIChatbot = () => {
 
   return (
     <>
-      <div ref={buttonRef}>
-        <FloatingChatButton onClick={toggleChat} isOpen={isOpen} />
-      </div>
+      <FloatingChatButton 
+        ref={buttonRef}
+        onClick={toggleChat} 
+        isOpen={isOpen} 
+      />
       <ChatWidget 
         isOpen={isOpen} 
         onClose={handleClose}
