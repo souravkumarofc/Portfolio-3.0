@@ -20,14 +20,14 @@ const Expertise = () => {
   ];
 
   return (
-    <section id="expertise" className="py-20 gradient-bg px-4">
+    <section id="expertise" className="py-20 gradient-bg px-4 transition-colors duration-300">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
             What I Do
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Frontend engineering, enterprise solutions, and building
             user-focused products.
           </p>
@@ -37,15 +37,15 @@ const Expertise = () => {
           {expertiseItems.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group"
+              className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg card-hover border border-gray-200 dark:border-gray-700 group"
             >
-              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300">
-                <i className={`fa-solid ${item.icon} text-2xl text-purple-600`}></i>
+              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
+                <i className={`fa-solid ${item.icon} text-2xl text-purple-600 dark:text-purple-400`}></i>
               </div>
-              <h3 className="font-playfair font-bold text-2xl mb-4 text-gray-800">
+              <h3 className="font-playfair font-bold text-2xl mb-4 text-gray-800 dark:text-white">
                 {item.title}
               </h3>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 {item.description}
               </p>
             </div>

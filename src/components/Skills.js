@@ -56,14 +56,14 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-white px-4">
+    <section id="skills" className="py-20 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
             Technical Skills
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Technologies and tools I use to craft high-quality web experiences
           </p>
         </div>
@@ -74,12 +74,12 @@ const Skills = () => {
             return (
               <div
                 key={index}
-                className="skill-card rounded-2xl p-6 text-center border border-gray-200 group hover:shadow-lg transition-all duration-300"
+                className="skill-card rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group hover:shadow-lg transition-all duration-300"
               >
                 <div className="mb-4 flex items-center justify-center h-14">
                   <IconComponent className="w-14 h-14 transition-transform duration-300 group-hover:scale-105" />
                 </div>
-                <span className="font-semibold text-sm md:text-base text-gray-700">
+                <span className="font-semibold text-sm md:text-base text-gray-700 dark:text-gray-300">
                   {skill.name}
                 </span>
               </div>

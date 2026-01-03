@@ -80,25 +80,25 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white px-4">
+    <section id="contact" className="py-20 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
             Contact Me
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-400">
             Let's discuss your next project
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Name *
                 </label>
@@ -109,14 +109,14 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your Name"
-                  className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
                   required
                 />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Email *
                 </label>
@@ -127,14 +127,14 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your.email@example.com"
-                  className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
                   required
                 />
               </div>
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Subject
                 </label>
@@ -145,13 +145,13 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="What's this about?"
-                  className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-semibold text-gray-700 mb-2"
+                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Message *
                 </label>
@@ -161,7 +161,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project or inquiry..."
-                  className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
                   rows="5"
                   required
                 ></textarea>
@@ -188,11 +188,11 @@ const Contact = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200">
-              <h3 className="font-playfair font-bold text-2xl mb-6 text-gray-800">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+              <h3 className="font-playfair font-bold text-2xl mb-6 text-gray-800 dark:text-white">
                 Get In Touch
               </h3>
-              <p className="text-gray-700 mb-8 leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
                 Ready to start your next project? I'd love to hear from you.
                 Let's create something amazing together.
               </p>
@@ -200,14 +200,14 @@ const Contact = () => {
               <div className="space-y-6">
                 <a
                   href="mailto:souravkumar.ofc@gmail.com"
-                  className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
                 >
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
-                    <i className="fa-solid fa-envelope text-purple-600"></i>
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
+                    <i className="fa-solid fa-envelope text-purple-600 dark:text-purple-400"></i>
                   </div>
                   <div>
                     <p className="font-semibold">Email</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       souravkumar.ofc@gmail.com
                     </p>
                   </div>
@@ -217,14 +217,14 @@ const Contact = () => {
                   href="https://www.linkedin.com/in/souravkumarofc/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
                 >
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
-                    <i className="fa-brands fa-linkedin text-purple-600"></i>
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
+                    <i className="fa-brands fa-linkedin text-purple-600 dark:text-purple-400"></i>
                   </div>
                   <div>
                     <p className="font-semibold">LinkedIn</p>
-                    <p className="text-sm text-gray-600">Connect with me</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Connect with me</p>
                   </div>
                 </a>
 
@@ -232,14 +232,14 @@ const Contact = () => {
                   href="https://github.com/souravkumarofc/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
                 >
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
-                    <i className="fa-brands fa-github text-purple-600"></i>
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
+                    <i className="fa-brands fa-github text-purple-600 dark:text-purple-400"></i>
                   </div>
                   <div>
                     <p className="font-semibold">GitHub</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       View my repositories
                     </p>
                   </div>
@@ -249,14 +249,14 @@ const Contact = () => {
                   href="https://x.com/souravkumarofc"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
+                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
                 >
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
-                    <i className="fa-brands fa-x-twitter text-purple-600"></i>
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
+                    <i className="fa-brands fa-x-twitter text-purple-600 dark:text-purple-400"></i>
                   </div>
                   <div>
                     <p className="font-semibold">X (Twitter)</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       Tech thoughts & updates
                     </p>
                   </div>

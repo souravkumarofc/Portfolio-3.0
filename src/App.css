@@ -1,2 +1,554 @@
 /* App-specific styles if needed */
 
+/* Chat Widget Animations */
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pop-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.15);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes logo-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+@keyframes expand-from-button {
+  0% {
+    transform: scale(0.3) translateY(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes macos-open {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(0.98);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes intercom-open {
+  0% {
+    transform: scale(0.3) translateY(100px) translateX(20px);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(0.95) translateY(-5px) translateX(-2px);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.02) translateY(2px) translateX(1px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes intercom-close {
+  0% {
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  30% {
+    transform: scale(0.6) translateY(40px) translateX(10px);
+    opacity: 0.8;
+    filter: blur(1px);
+  }
+  60% {
+    transform: scale(0.25) translateY(80px) translateX(20px);
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(0.1) translateY(100px) translateX(25px);
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+@keyframes logo-bounce-only {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+.animate-macos-open {
+  animation: macos-open 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-intercom-open {
+  animation: intercom-open 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-intercom-close {
+  animation: intercom-close 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-logo-bounce-only {
+  animation: logo-bounce-only 0.4s ease-in-out;
+}
+
+/* Realistic 3D floating UFO animation (always running) */
+@keyframes smooth-bounce {
+  0% {
+    transform: translateY(0) translateX(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+  16.66% {
+    transform: translateY(-8px) translateX(2px) translateZ(5px) rotateX(2deg) rotateY(-3deg) rotateZ(1deg) scale(1.02);
+  }
+  33.33% {
+    transform: translateY(-10px) translateX(-1px) translateZ(8px) rotateX(-1deg) rotateY(2deg) rotateZ(-1deg) scale(1.03);
+  }
+  50% {
+    transform: translateY(-8px) translateX(-2px) translateZ(5px) rotateX(1deg) rotateY(-2deg) rotateZ(1deg) scale(1.02);
+  }
+  66.66% {
+    transform: translateY(-6px) translateX(1px) translateZ(3px) rotateX(-2deg) rotateY(3deg) rotateZ(-1deg) scale(1.01);
+  }
+  83.33% {
+    transform: translateY(-4px) translateX(0) translateZ(2px) rotateX(1deg) rotateY(-1deg) rotateZ(0deg) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) translateX(0) translateZ(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+}
+
+.animate-smooth-bounce {
+  animation: smooth-bounce 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Smooth excited hover bounce (different from regular) */
+@keyframes hover-bounce {
+  0%, 100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) translateY(-8px) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.18) translateY(-12px) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.19) translateY(-6px) rotate(-3deg);
+  }
+}
+
+.animate-hover-bounce {
+  animation: hover-bounce 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  transition: transform 0.4s ease-out;
+}
+
+.logo-3d {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5)) 
+          drop-shadow(0 8px 16px rgba(147, 51, 234, 0.7))
+          drop-shadow(0 0 32px rgba(147, 51, 234, 0.5))
+          drop-shadow(0 -6px 12px rgba(255, 255, 255, 0.3))
+          drop-shadow(0 4px 8px rgba(147, 51, 234, 0.4))
+          drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3))
+          brightness(1.05) 
+          contrast(1.1) 
+          saturate(1.15);
+  transform-style: preserve-3d;
+  will-change: transform;
+  perspective: 1000px;
+  backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.animate-logo-bounce {
+  animation: logo-bounce 0.5s ease-in-out;
+}
+
+.animate-expand-from-button {
+  animation: expand-from-button 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-pop-bounce {
+  animation: pop-bounce 0.6s ease-out;
+}
+
+/* Chat Widget Scrolling Fix */
+.chat-messages-container {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Remove all focus rectangles and outlines */
+.chat-input input:focus,
+.chat-input input:active,
+.chat-input input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.chat-input:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Chat Widget Modern Styling */
+.chat-messages-container {
+  background: #ffffff !important;
+}
+
+/* Message bubble styling */
+.message-bubble-assistant {
+  background: #f3f4f6;
+  border-radius: 1rem;
+  border-top-left-radius: 0.25rem;
+}
+
+.message-bubble-user {
+  background: #9333ea;
+  border-radius: 1rem;
+  border-top-right-radius: 0.25rem;
+}
+
+/* Responsive Chat Widget Positioning - Bottom Right */
+.chat-widget-responsive {
+  /* Mobile (default) - Position at bottom right, above the button with clear gap */
+  /* Button: bottom 1rem (16px) + height 56px = 72px from bottom, add 40px gap = 112px */
+  position: fixed;
+  bottom: calc(1rem + 56px + 40px); /* Button bottom (1rem) + height (56px) + gap (40px) */
+  right: 1rem;
+  left: 1rem; /* Ensure left margin on mobile */
+  width: calc(100vw - 2rem);
+  max-width: 384px;
+  height: 500px;
+  /* Ensure it doesn't go above header (80px) and stays within viewport */
+  max-height: calc(100vh - 80px - 1rem - 56px - 40px); /* Viewport - header - button space */
+  min-width: 280px;
+  min-height: 300px; /* Reduced for mobile */
+  transition: bottom 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Small screens (640px and up) */
+@media (min-width: 640px) {
+  .chat-widget-responsive {
+    right: 1.5rem;
+    left: auto; /* Remove left constraint on larger screens */
+    bottom: calc(1.5rem + 56px + 40px); /* Button bottom (1.5rem) + height (56px) + gap (40px) */
+    width: 384px;
+    height: 600px;
+    max-height: calc(100vh - 80px - 1.5rem - 56px - 40px); /* Ensure no overlap with header */
+  }
+}
+
+/* Medium screens (768px and up) */
+@media (min-width: 768px) {
+  .chat-widget-responsive {
+    right: 2.5rem;
+    left: auto; /* Remove left constraint on larger screens */
+    bottom: calc(2.5rem + 56px + 40px); /* Button bottom (2.5rem) + height (56px) + gap (40px) */
+    width: 384px;
+    height: 600px;
+    max-height: calc(100vh - 80px - 2.5rem - 56px - 40px); /* Ensure no overlap with header */
+  }
+}
+
+/* Large screens (1024px and up) */
+@media (min-width: 1024px) {
+  .chat-widget-responsive {
+    right: 2.5rem;
+    left: auto; /* Remove left constraint on larger screens */
+    bottom: calc(2.5rem + 56px + 40px); /* Button bottom (2.5rem) + height (56px) + gap (40px) */
+    width: 384px;
+    height: 600px;
+    max-height: calc(100vh - 80px - 2.5rem - 56px - 40px); /* Ensure no overlap with header */
+  }
+}
+
+/* Extra small screens (below 640px) - ensure no overlap */
+@media (max-width: 639px) {
+  .chat-widget-responsive {
+    right: 1rem;
+    left: 1rem;
+    bottom: calc(1rem + 56px + 32px); /* Button bottom (1rem) + height (56px) + gap (32px) */
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+    /* Calculate height: viewport - header (80px) - button space (1rem + 56px + 32px) - top padding (1rem) */
+    height: calc(100vh - 80px - 1rem - 56px - 32px - 1rem);
+    max-height: calc(100vh - 80px - 1rem - 56px - 32px - 1rem);
+    min-width: 280px;
+    min-height: 300px; /* Reduced for mobile */
+  }
+}
+
+/* Very small screens (below 480px) */
+@media (max-width: 479px) {
+  .chat-widget-responsive {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: calc(0.75rem + 56px + 24px); /* Button bottom (0.75rem) + height (56px) + gap (24px) */
+    width: calc(100vw - 1.5rem);
+    max-width: calc(100vw - 1.5rem);
+    /* Calculate height: viewport - header (70px) - button space (0.75rem + 56px + 24px) - top padding (0.75rem) */
+    height: calc(100vh - 70px - 0.75rem - 56px - 24px - 0.75rem);
+    max-height: calc(100vh - 70px - 0.75rem - 56px - 24px - 0.75rem);
+    min-width: 260px;
+    min-height: 280px; /* Further reduced for very small screens */
+  }
+  
+  .chat-button-responsive {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Responsive Chat Button Positioning - Always at bottom right */
+.chat-button-responsive {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  transition: bottom 0.3s ease-out, transform 0.3s ease-out;
+  /* Remove all focus and active state visuals */
+  outline: none !important;
+  border: none !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(147, 51, 234, 0) !important;
+}
+
+/* Remove focus ring and active state background */
+.chat-button-responsive:focus,
+.chat-button-responsive:focus-visible,
+.chat-button-responsive:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  background-color: rgb(147, 51, 234) !important; /* Keep purple background */
+}
+
+.chat-button-responsive:hover:active {
+  background-color: rgb(126, 34, 206) !important; /* Slightly darker on active hover */
+}
+
+/* Remove tap highlight on mobile devices */
+.chat-button-responsive {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .chat-button-responsive {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .chat-button-responsive {
+    bottom: 2.5rem;
+    right: 2.5rem;
+  }
+}
+
+/* Button stays at bottom-right, only icon changes when chat opens */
+/* No position change - button remains in same place */
+.chat-button-open {
+  /* Position stays the same, only icon changes from robot to down arrow */
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Ensure z-index hierarchy */
+.chat-widget-responsive {
+  z-index: 40;
+}
+
+.chat-button-responsive {
+  z-index: 50;
+}
+
+/* Header should always be above chat widget */
+header {
+  z-index: 50 !important;
+}
+
+/* Additional mobile safety - ensure chatbox doesn't get cut off */
+@media (max-width: 639px) {
+  .chat-widget-responsive {
+    /* Use safe area insets for mobile devices */
+    top: auto;
+    /* Ensure minimum top spacing from header */
+    max-height: calc(100vh - env(safe-area-inset-top, 0px) - 80px - 1rem - 56px - 32px - 1rem);
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 479px) {
+  .chat-widget-responsive {
+    /* Use safe area insets for very small screens */
+    max-height: calc(100vh - env(safe-area-inset-top, 0px) - 70px - 0.75rem - 56px - 24px - 0.75rem);
+    /* Ensure it doesn't overflow horizontally */
+    max-width: calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 1.5rem);
+  }
+}
+
+/* Emoji Picker Styling */
+.emoji-picker-container {
+  position: relative;
+}
+
+.emoji-picker-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 0.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+  z-index: 50;
+  width: 280px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.emoji-picker-popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.emoji-picker-popup::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.emoji-picker-popup::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.emoji-picker-popup::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.25rem;
+}
+
+.emoji-button {
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.emoji-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* Scrollable Navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Smooth scrollbar for nav */
+.desktop-nav ul {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Resume Button - Bottom Shadow Only (Soft & Diffused) */
+.resume-button {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.resume-button:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px) !important;
+}

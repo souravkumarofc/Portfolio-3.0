@@ -36,12 +36,13 @@ const Header = () => {
           <div className="text-2xl font-playfair font-bold text-primary tracking-tight">
             Sourav Kumar
           </div>
-          <button
-            id="mobile-menu-button"
-            className="md:hidden mobile-menu-button"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              id="mobile-menu-button"
+              className="mobile-menu-button text-gray-700"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -56,78 +57,80 @@ const Header = () => {
                 d="M4 6h16M4 12h16m-7 6h7"
               ></path>
             </svg>
-          </button>
-          <div id="nav-content" className="desktop-nav">
-            <ul className="flex flex-row space-x-8 items-center">
-              <li>
+            </button>
+          </div>
+          <div id="nav-content" className="desktop-nav overflow-x-auto scrollbar-hide">
+            <ul className="flex flex-row space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center min-w-max">
+              <li className="flex-shrink-0">
                 <a
                   href="#hero"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Home
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#about"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   About
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#education"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Education
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#experience"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Experience
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#honors-awards"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
-                  Honors & Awards
+                  <span className="hidden sm:inline">Honors & Awards</span>
+                  <span className="sm:hidden">Awards</span>
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#projects"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Projects
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#skills"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Skills
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="#contact"
-                  className="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
+                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
                   Contact
                 </a>
               </li>
-              <li>
+              <li className="flex-shrink-0">
                 <a
                   href="/Sourav Kumar CV.pdf"
                   download
-                  className="px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2"
+                  className="resume-button px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 whitespace-nowrap"
                 >
                   <i className="fa-solid fa-file-arrow-down"></i>
                   <span>Resume</span>
@@ -242,7 +245,7 @@ const Header = () => {
             <a
               href="/Sourav Kumar CV.pdf"
               download
-              className="mt-4 px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2 justify-center"
+              className="resume-button mt-4 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 justify-center"
             >
               <i className="fa-solid fa-file-arrow-down"></i>
               <span>Resume</span>

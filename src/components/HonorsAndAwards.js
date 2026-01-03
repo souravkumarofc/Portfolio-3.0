@@ -15,10 +15,10 @@ const HonorsAndAwards = () => {
   };
 
   return (
-    <section id="honors-awards" className="py-16 bg-white px-4">
+    <section id="honors-awards" className="py-16 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
             🏆 Honors & Awards
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
@@ -26,14 +26,14 @@ const HonorsAndAwards = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {/* Left Container - Certificate Image */}
-          <div className="bg-gray-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden card-hover">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
             <a
               href={award.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="block cursor-pointer h-full"
             >
-              <div className="p-4 h-full flex items-center justify-center bg-white">
+              <div className="p-4 h-full flex items-center justify-center bg-white dark:bg-gray-800">
                 {!imageError ? (
                   <img
                     src={award.certificateImage}
@@ -47,13 +47,13 @@ const HonorsAndAwards = () => {
                     loading="eager"
                   />
                 ) : (
-                  <div className="w-full bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 flex flex-col items-center justify-center p-8 text-center min-h-[300px] rounded-lg">
-                    <div className="w-24 h-24 mb-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center shadow-lg">
-                      <i className="fa-solid fa-trophy text-5xl text-purple-600"></i>
+                  <div className="w-full bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900/30 dark:via-blue-900/30 dark:to-indigo-900/30 flex flex-col items-center justify-center p-8 text-center min-h-[300px] rounded-lg">
+                    <div className="w-24 h-24 mb-4 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-800/50 dark:to-blue-800/50 rounded-2xl flex items-center justify-center shadow-lg">
+                      <i className="fa-solid fa-trophy text-5xl text-purple-600 dark:text-purple-400"></i>
                     </div>
-                    <p className="text-gray-800 font-bold text-base mb-2">Certificate</p>
-                    <p className="text-gray-600 text-sm mb-2">ServiceNow Gen AI Hackathon 2024</p>
-                    <p className="text-gray-500 text-xs">Image not found</p>
+                    <p className="text-gray-800 dark:text-gray-200 font-bold text-base mb-2">Certificate</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">ServiceNow Gen AI Hackathon 2024</p>
+                    <p className="text-gray-500 dark:text-gray-500 text-xs">Image not found</p>
                   </div>
                 )}
               </div>
@@ -61,43 +61,43 @@ const HonorsAndAwards = () => {
           </div>
 
           {/* Right Container - Award Details */}
-          <div className="bg-gray-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden card-hover">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
             <div className="p-6">
               <div className="mb-4">
-                <h3 className="font-playfair font-bold text-2xl md:text-3xl text-gray-800 mb-2">
+                <h3 className="font-playfair font-bold text-2xl md:text-3xl text-gray-800 dark:text-white mb-2">
                   {award.title}
                 </h3>
-                <p className="text-lg text-blue-700 font-semibold mb-2">
+                <p className="text-lg text-blue-700 dark:text-blue-400 font-semibold mb-2">
                   {award.company}
                 </p>
-                <div className="inline-block px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold mb-4">
+                <div className="inline-block px-4 py-2 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-300 rounded-full text-sm font-bold mb-4">
                   🥇 {award.achievement}
                 </div>
               </div>
 
               <div className="space-y-4 mb-6">
                 <div>
-                  <p className="text-gray-800 leading-relaxed font-medium mb-2">
+                  <p className="text-gray-800 dark:text-gray-200 leading-relaxed font-medium mb-2">
                     Project Highlights:
                   </p>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {award.description}
                   </p>
                 </div>
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                  <p className="text-gray-700 leading-relaxed italic">
+                <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400 p-4 rounded-r-lg">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
                     {award.recognition}
                   </p>
                 </div>
               </div>
 
               <div className="mb-6">
-                <p className="text-sm text-gray-600 mb-2 font-semibold">Technologies:</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 font-semibold">Technologies:</p>
                 <div className="flex flex-wrap gap-2">
                   {award.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium"
                     >
                       {tag}
                     </span>

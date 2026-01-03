@@ -10,6 +10,7 @@ import Skills from './components/Skills';
 import Expertise from './components/Expertise';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AIChatbot from './components/AIChatbot';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import './App.css';
 
@@ -34,7 +35,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-background text-foreground font-inter scroll-smooth">
+    <div className="min-h-screen bg-white text-gray-900 font-inter scroll-smooth">
       <Header />
       <Hero />
       <About />
@@ -46,6 +47,7 @@ function App() {
       <Expertise />
       <Contact />
       <Footer />
+      <AIChatbot />
     </div>
   );
 }

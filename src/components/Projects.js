@@ -53,14 +53,14 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-white px-4">
+    <section id="projects" className="py-20 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
             Featured Projects
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             A selection of projects that highlight my frontend and full-stack
             capabilities.
           </p>
@@ -70,9 +70,9 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
+              className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover group"
             >
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/40 dark:to-purple-800/40 flex items-center justify-center h-56">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -80,17 +80,17 @@ const Projects = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="font-playfair font-bold text-xl mb-3 text-gray-800">
+                <h3 className="font-playfair font-bold text-xl mb-3 text-gray-800 dark:text-white">
                   {project.title}
                 </h3>
-                <p className="text-gray-700 mb-4 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium"
                     >
                       {tag}
                     </span>
@@ -101,7 +101,7 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-700 hover:text-white transition-all duration-300 font-semibold"
                   >
                     <i className="fa-solid fa-code"></i>
                     <span>Code</span>
@@ -110,7 +110,7 @@ const Projects = () => {
                     href={project.demoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 dark:bg-purple-700 text-white hover:bg-purple-700 dark:hover:bg-purple-800 transition-all duration-300 font-semibold"
                   >
                     <i className="fa-solid fa-rocket"></i>
                     <span>Live Demo</span>

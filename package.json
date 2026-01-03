@@ -4,16 +4,27 @@
   "description": "Sourav Kumar - Frontend Developer Portfolio",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.0.0",
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "@emailjs/browser": "^4.0.0"
+    "undici": "^5.28.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "PORT=3001 node server.js",
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "start:prod": "NODE_ENV=production PORT=8080 node server.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
   "eslintConfig": {
     "extends": [
@@ -33,4 +44,3 @@
     ]
   }
 }
-

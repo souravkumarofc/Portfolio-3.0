@@ -95,7 +95,7 @@ const Hero = () => {
       className="pt-20 md:pt-24 pb-32 flex flex-col items-center gradient-bg hero-pattern px-4 relative overflow-hidden"
     >
       <ParticleNetwork />
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 dark:from-purple-500/10 to-transparent"></div>
       <div className="relative z-10 text-center max-w-4xl mx-auto">
         <div className="mx-auto mb-8 image-container" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
           <div
@@ -159,14 +159,14 @@ const Hero = () => {
               }}
             />
             {imageError && (
-              <div className="w-full h-full rounded-2xl shadow-[0_20px_60px_rgba(139,92,246,0.3)] bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Image not found</span>
+              <div className="w-full h-full rounded-2xl shadow-[0_20px_60px_rgba(139,92,246,0.3)] bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                <span className="text-gray-400 dark:text-gray-500 text-sm">Image not found</span>
               </div>
             )}
           </div>
         </div>
         <h1
-          className={`text-4xl md:text-6xl font-playfair font-bold mb-4 text-gray-800 tracking-tight leading-tight transition-all duration-1000 ease-out delay-200 ${
+          className={`text-4xl md:text-6xl font-playfair font-bold mb-4 text-gray-800 dark:text-white tracking-tight leading-tight transition-all duration-1000 ease-out delay-200 ${
             imageLoaded
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-8'
@@ -175,7 +175,7 @@ const Hero = () => {
           Sourav Kumar
         </h1>
         <h2
-          className={`text-xl md:text-2xl text-gray-600 font-semibold mb-6 transition-all duration-1000 ease-out delay-300 ${
+          className={`text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-semibold mb-6 transition-all duration-1000 ease-out delay-300 ${
             imageLoaded
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-8'
@@ -184,7 +184,7 @@ const Hero = () => {
           Frontend Developer, Building Scalable React Applications
         </h2>
         <p
-          className={`max-w-2xl mx-auto text-center text-gray-700 text-lg md:text-xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-400 ${
+          className={`max-w-2xl mx-auto text-center text-gray-700 dark:text-gray-300 text-lg md:text-xl mb-10 leading-relaxed transition-all duration-1000 ease-out delay-400 ${
             imageLoaded
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-8'
@@ -207,7 +207,7 @@ const Hero = () => {
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 bg-white border-2 border-purple-600 text-purple-600 rounded-xl shadow-lg hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold text-lg"
+            className="px-8 py-4 bg-white dark:bg-gray-800 border-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 rounded-xl shadow-lg hover:bg-purple-600 dark:hover:bg-purple-700 hover:text-white transition-all duration-300 font-semibold text-lg"
           >
             Contact Me
           </a>
