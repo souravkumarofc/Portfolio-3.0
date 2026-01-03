@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 // Only log in development
 const isDev = process.env.NODE_ENV === 'development';
-const devLog = (...args) => { if (isDev) console.log(...args); };
 const devError = (...args) => { if (isDev) console.error(...args); };
 
 const HonorsAndAwards = () => {
