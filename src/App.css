@@ -295,9 +295,13 @@
   max-width: 384px;
   height: 500px;
   /* Ensure it doesn't go above header (80px) and stays within viewport */
+  /* Header is typically 64-80px, using 80px for safety */
+  top: auto; /* Let bottom positioning handle it */
   max-height: calc(100vh - 80px - 1rem - 56px - 40px); /* Viewport - header - button space */
   min-width: 280px;
   min-height: 300px; /* Reduced for mobile */
+  /* Ensure chatbot appears above header */
+  z-index: 60 !important;
   transition: bottom 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
@@ -310,6 +314,7 @@
     width: 384px;
     height: 600px;
     max-height: calc(100vh - 80px - 1.5rem - 56px - 40px); /* Ensure no overlap with header */
+    z-index: 60 !important; /* Above header */
   }
 }
 
@@ -322,6 +327,7 @@
     width: 384px;
     height: 600px;
     max-height: calc(100vh - 80px - 2.5rem - 56px - 40px); /* Ensure no overlap with header */
+    z-index: 60 !important; /* Above header */
   }
 }
 
@@ -334,6 +340,7 @@
     width: 384px;
     height: 600px;
     max-height: calc(100vh - 80px - 2.5rem - 56px - 40px); /* Ensure no overlap with header */
+    z-index: 60 !important; /* Above header */
   }
 }
 
@@ -347,6 +354,7 @@
     max-width: calc(100vw - 2rem);
     /* Calculate height: viewport - header (80px) - button space (1rem + 56px + 32px) - top padding (1rem) */
     height: calc(100vh - 80px - 1rem - 56px - 32px - 1rem);
+    z-index: 60 !important; /* Above header */
     max-height: calc(100vh - 80px - 1rem - 56px - 32px - 1rem);
     min-width: 280px;
     min-height: 300px; /* Reduced for mobile */
@@ -438,9 +446,14 @@
   z-index: 50;
 }
 
-/* Header should always be above chat widget */
+/* Portfolio header z-index */
 header {
   z-index: 50 !important;
+}
+
+/* Chatbot should appear above portfolio header */
+.chat-widget-responsive {
+  z-index: 60 !important;
 }
 
 /* Additional mobile safety - ensure chatbox doesn't get cut off */

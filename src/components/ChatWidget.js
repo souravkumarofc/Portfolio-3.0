@@ -451,7 +451,7 @@ Key highlights:
   return (
     <div 
       ref={widgetRef}
-      className={`fixed z-40 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden chat-widget-responsive transition-colors duration-300 ${
+      className={`fixed z-[60] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden chat-widget-responsive transition-colors duration-300 ${
         isOpen ? 'animate-intercom-open' : isClosing ? 'animate-intercom-close' : ''
       }`} 
       style={{ 
