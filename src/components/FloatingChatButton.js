@@ -7,8 +7,39 @@ const devLog = (...args) => { if (isDev) console.log(...args); };
 const FloatingChatButton = forwardRef(({ onClick, isOpen }, ref) => {
   const [imageError, setImageError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [buttonStyle, setButtonStyle] = useState({
+    position: 'fixed',
+    bottom: '1rem',
+    right: '1rem',
+    top: 'auto',
+    left: 'auto',
+    zIndex: 9999,
+    margin: 0,
+    transform: 'none'
+  });
   const audioContextRef = useRef(null);
   const lastSoundTimeRef = useRef(0);
+
+  // Update button position on window resize to ensure it stays fixed
+  useEffect(() => {
+    const updatePosition = () => {
+      const width = window.innerWidth;
+      setButtonStyle({
+        position: 'fixed',
+        bottom: width >= 768 ? '2.5rem' : width >= 640 ? '1.5rem' : '1rem',
+        right: width >= 768 ? '2.5rem' : width >= 640 ? '1.5rem' : '1rem',
+        top: 'auto',
+        left: 'auto',
+        zIndex: 9999,
+        margin: 0,
+        transform: 'none'
+      });
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    return () => window.removeEventListener('resize', updatePosition);
+  }, []);
 
   // Get or create shared AudioContext
   const getAudioContext = () => {
