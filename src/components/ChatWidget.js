@@ -70,18 +70,18 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
 
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
-      
+
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
-      
+
       oscillator.frequency.value = frequency;
       oscillator.type = 'sine'; // Smooth sine wave
-      
+
       // Very smooth envelope: quick gentle rise, smooth fade out
       gainNode.gain.setValueAtTime(0, baseTime);
       gainNode.gain.linearRampToValueAtTime(0.1, baseTime + 0.02); // Gentle volume
       gainNode.gain.exponentialRampToValueAtTime(0.001, baseTime + duration); // Smooth fade out
-      
+
       oscillator.start(baseTime);
       oscillator.stop(baseTime + duration);
     } catch (error) {
@@ -93,28 +93,28 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   const playCloseSound = () => {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
+
       // Resume if suspended
       if (audioContext.state === 'suspended') {
         audioContext.resume();
       }
-      
+
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
-      
+
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
-      
+
       // Gentle descending tone
       oscillator.frequency.setValueAtTime(550, audioContext.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.15);
       oscillator.type = 'sine';
-      
+
       // Smooth envelope
       gainNode.gain.setValueAtTime(0, audioContext.currentTime);
       gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.02);
       gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
-      
+
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.15);
     } catch (error) {
@@ -169,9 +169,9 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
         // FIRST: Try local data (works offline, no server needed)
         const localAnswer = getLocalAnswer(userMessage);
         if (localAnswer) {
-          setMessages(prev => [...prev, { 
-            role: 'assistant', 
-            content: localAnswer 
+          setMessages(prev => [...prev, {
+            role: 'assistant',
+            content: localAnswer
           }]);
           setIsLoading(false);
           return;
@@ -179,13 +179,13 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
 
         // SECOND: Try server API (for unique questions or Gemini)
         const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001/api/ask';
-        
+
         let response;
         try {
           // Create timeout controller
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-          
+
           response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -194,7 +194,7 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
             body: JSON.stringify({ question: userMessage }),
             signal: controller.signal
           });
-          
+
           clearTimeout(timeoutId);
         } catch (fetchError) {
           // Network error - try local data as fallback
@@ -244,9 +244,9 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
           }
         } else {
           // Success - add response (works for both local and Gemini responses)
-          setMessages(prev => [...prev, { 
-            role: 'assistant', 
-            content: data.response 
+          setMessages(prev => [...prev, {
+            role: 'assistant',
+            content: data.response
           }]);
         }
       } catch (error) {
@@ -319,17 +319,17 @@ const ChatWidget = ({ isOpen, onClose, buttonPosition = { x: 0, y: 0 } }) => {
   const getLocalAnswer = (question) => {
     const lowerQuestion = question.toLowerCase().trim();
     devLog('🔍 Checking local answer for:', question, '→', lowerQuestion);
-    
+
     // Greetings - but skip if question contains portfolio keywords
     const greetingKeywords = ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'];
     const portfolioKeywords = ['skill', 'project', 'experience', 'education', 'resume', 'sourav', 'portfolio', 'frontend', 'work', 'job'];
     const hasPortfolioKeyword = portfolioKeywords.some(word => lowerQuestion.includes(word));
-    
+
     if (greetingKeywords.some(keyword => lowerQuestion.includes(keyword)) && !hasPortfolioKeyword) {
       devLog('✅ Matched greeting');
       return "Hello! I'm here to help you learn about Sourav Kumar's portfolio. You can ask me about:\n- His technical skills\n- His projects\n- His work experience\n- His frontend development expertise\n\nWhat would you like to know?";
     }
-    
+
     // Skills
     if (lowerQuestion.includes('skill') || lowerQuestion.includes('technolog') || lowerQuestion.includes('tech stack')) {
       return `Sourav's technical skills include:
@@ -351,7 +351,7 @@ Tools & Platforms:
 - JSON, npm, Postman, Jira
 - Firebase, FastAPI, ServiceNow`;
     }
-    
+
     // Projects
     if (lowerQuestion.includes('project') || lowerQuestion.includes('built') || lowerQuestion.includes('created')) {
       return `Sourav's featured projects:
@@ -386,7 +386,7 @@ Tools & Platforms:
 - Technologies: HTML, CSS, JavaScript, API Integration
 - Demo: https://covid19-cowin.netlify.app/`;
     }
-    
+
     // Experience - improved pattern matching
     const experiencePatterns = [
       'experience', 'work experience', 'job', 'employment', 'career',
@@ -419,7 +419,7 @@ Frontend Developer — Lyearn (Jun 2020 – Mar 2021)
 - Developed responsive and accessible UI components
 - Converted Figma designs into production-ready React components`;
     }
-    
+
     // Education
     if (lowerQuestion.includes('education') || lowerQuestion.includes('degree') || lowerQuestion.includes('college') || lowerQuestion.includes('university')) {
       return `Sourav Kumar's education:
@@ -433,12 +433,12 @@ Key highlights:
 - Strong foundation in algorithms, data structures, and software engineering
 - Worked on multiple web projects during studies`;
     }
-    
+
     // Resume
     if (lowerQuestion.includes('resume') || lowerQuestion.includes('cv')) {
-      return `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar CV.pdf" and can be downloaded by clicking the Resume button.`;
+      return `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar.pdf" and can be downloaded by clicking the Resume button.`;
     }
-    
+
     // Count questions
     if (lowerQuestion.includes('how many')) {
       if (lowerQuestion.includes('skill') || lowerQuestion.includes('technolog')) {
@@ -461,14 +461,14 @@ Key highlights:
         return `Sourav knows 2 programming languages: Java and Python. He also works extensively with JavaScript and TypeScript for frontend development.`;
       }
     }
-    
+
     // Experience years
     if (lowerQuestion.includes('year') && lowerQuestion.includes('experience')) {
       const startDate = new Date('2020-06-01');
       const years = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24 * 365.25));
       return `Sourav has over ${years} years of professional experience (since June 2020). He is currently working as a Software Developer at Aimleap (Oct 2025-Present). Previously, he worked at Capgemini as an Analyst (Dec 2022-Oct 2025), Worksbot as Full Stack Developer (Jan 2022-Mar 2022), and Lyearn as Frontend Developer (Jun 2020-Mar 2021).`;
     }
-    
+
     devLog('❌ No local match found for:', question);
     return null; // No local match found
   };
@@ -498,12 +498,11 @@ Key highlights:
   if (!isOpen && !isClosing) return null;
 
   return (
-    <div 
+    <div
       ref={widgetRef}
-      className={`fixed z-[60] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden chat-widget-responsive transition-colors duration-300 ${
-        isOpen ? 'animate-intercom-open' : isClosing ? 'animate-intercom-close' : ''
-      }`} 
-      style={{ 
+      className={`fixed z-[60] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden chat-widget-responsive transition-colors duration-300 ${isOpen ? 'animate-intercom-open' : isClosing ? 'animate-intercom-close' : ''
+        }`}
+      style={{
         transformOrigin: transformOrigin,
         willChange: isClosing ? 'transform, opacity, filter' : 'auto'
       }}
@@ -516,9 +515,9 @@ Key highlights:
               <i className="fa-solid fa-robot text-white"></i>
             </div>
           ) : (
-            <img 
-              src="/images/chatbot.png" 
-              alt="AI Assistant" 
+            <img
+              src="/images/chatbot.png"
+              alt="AI Assistant"
               draggable="false"
               className="w-10 h-10 rounded-full object-cover"
               style={{
@@ -568,7 +567,7 @@ Key highlights:
             )}
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex flex-col items-start">
             <div className="max-w-[85%]">
@@ -586,7 +585,7 @@ Key highlights:
           </div>
         )}
 
-        
+
         {/* Suggested Questions - No rectangle boxes, just text links */}
         {showSuggestions && messages.length === 1 && !isLoading && (
           <div className="flex flex-col gap-2 mt-4">
@@ -608,7 +607,7 @@ Key highlights:
             </div>
           </div>
         )}
-        
+
         <div ref={messagesEndRef} />
       </div>
 
@@ -632,7 +631,7 @@ Key highlights:
               }}
             />
           </div>
-          
+
           {/* Bottom: Icons row */}
           <div className="flex items-center justify-between">
             {/* Left side: Emoji and Mic buttons */}
@@ -681,7 +680,7 @@ Key highlights:
 
                   // Check for Speech Recognition API
                   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                  
+
                   if (!SpeechRecognition) {
                     devLog('Speech recognition not supported in this browser');
                     return;
@@ -690,24 +689,24 @@ Key highlights:
                   try {
                     const recognition = new SpeechRecognition();
                     recognitionRef.current = recognition;
-                    
+
                     recognition.continuous = false; // Stop after speech ends
                     recognition.interimResults = true; // Show live results
                     recognition.lang = 'en-US';
                     recognition.maxAlternatives = 1; // Only get best result
-                    
+
                     let accumulatedFinalText = '';
-                    
+
                     recognition.onstart = () => {
                       setIsListening(true);
                       accumulatedFinalText = '';
                       devLog('Voice recognition started');
                     };
-                    
+
                     recognition.onresult = (event) => {
                       let interimText = '';
                       let finalText = '';
-                      
+
                       // Process only new results (from resultIndex) to avoid duplicates
                       for (let i = event.resultIndex; i < event.results.length; i++) {
                         const transcript = event.results[i][0].transcript.trim();
@@ -720,18 +719,18 @@ Key highlights:
                           interimText += transcript;
                         }
                       }
-                      
+
                       // Accumulate final text (avoid duplicates)
                       if (finalText) {
                         accumulatedFinalText += finalText;
                       }
-                      
+
                       // Update input: accumulated final + current interim (no base text manipulation)
                       setInput(() => {
                         const combined = (accumulatedFinalText.trim() + ' ' + interimText).trim();
                         return combined;
                       });
-                      
+
                       // Focus and move cursor to end
                       setTimeout(() => {
                         if (inputRef.current) {
@@ -741,12 +740,12 @@ Key highlights:
                         }
                       }, 50);
                     };
-                    
+
                     recognition.onerror = (event) => {
                       devLog('Voice recognition error:', event.error);
                       setIsListening(false);
                       recognitionRef.current = null;
-                      
+
                       // Handle specific errors
                       if (event.error === 'not-allowed') {
                         devLog('Microphone permission denied');
@@ -758,12 +757,12 @@ Key highlights:
                         devLog('Voice recognition error:', event.error);
                       }
                     };
-                    
+
                     recognition.onend = () => {
                       setIsListening(false);
                       recognitionRef.current = null;
                     };
-                    
+
                     // Start recognition
                     recognition.start();
                   } catch (error) {
@@ -772,26 +771,24 @@ Key highlights:
                     recognitionRef.current = null;
                   }
                 }}
-                className={`p-1.5 transition-colors ${
-                  isListening 
-                    ? 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500' 
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                }`}
+                className={`p-1.5 transition-colors ${isListening
+                  ? 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                  }`}
                 aria-label="Voice input"
               >
                 <i className={`fa-solid fa-microphone text-lg ${isListening ? 'animate-pulse' : ''}`}></i>
               </button>
             </div>
-            
+
             {/* Right side: Send button */}
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                input.trim()
-                  ? 'bg-purple-600 dark:bg-purple-700 hover:bg-purple-700 dark:hover:bg-purple-800 text-white'
-                  : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
-              }`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${input.trim()
+                ? 'bg-purple-600 dark:bg-purple-700 hover:bg-purple-700 dark:hover:bg-purple-800 text-white'
+                : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
+                }`}
               aria-label="Send message"
             >
               <i className={`fa-solid fa-arrow-up text-xs ${input.trim() ? 'text-white' : 'text-gray-700 dark:text-gray-300'}`}></i>

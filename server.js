@@ -150,7 +150,7 @@ Frontend Developer — Lyearn (Jun 2020 – Mar 2021)
   },
   resume: {
     keywords: ['resume', 'cv', 'curriculum vitae', 'download resume', 'get resume', 'resume pdf', 'cv pdf', 'download cv'],
-    answer: `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar CV.pdf" and can be downloaded by clicking the Resume button.`
+    answer: `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar.pdf" and can be downloaded by clicking the Resume button.`
   },
   education: {
     keywords: ['education', 'educat', 'degree', 'qualification', 'qualifications', 'university', 'college', 'btech', 'b.tech', 'graduation', 'graduate', 'studied', 'study', 'cgpa', 'gpa'],
@@ -194,7 +194,7 @@ EDUCATION:
 - Strong foundation in algorithms, data structures, and software engineering
 - Worked on multiple web projects during studies
 
-RESUME: Available for download on the portfolio website via the "Resume" button in navigation menu (PDF: "Sourav Kumar CV.pdf")
+RESUME: Available for download on the portfolio website via the "Resume" button in navigation menu (PDF: "Sourav Kumar.pdf")
 
 YOUR ROLE & BEHAVIOR:
 You are an intelligent AI assistant that understands context, intent, and nuance. You should:
@@ -242,21 +242,21 @@ Remember: You're an intelligent AI. Understand the user's question deeply, provi
 function fuzzyMatch(text, pattern) {
   const lowerText = text.toLowerCase();
   const lowerPattern = pattern.toLowerCase();
-  
+
   // Exact match
   if (lowerText.includes(lowerPattern)) return true;
-  
+
   // Common typos mapping
   const commonTypos = {
     'experience': ['expereince', 'experiance', 'expirience', 'experence', 'experiance', 'expierence'],
     'skill': ['skil', 'skils', 'skilz'],
     'project': ['projct', 'projet', 'projec']
   };
-  
+
   if (commonTypos[lowerPattern]) {
     return commonTypos[lowerPattern].some(typo => lowerText.includes(typo));
   }
-  
+
   return false;
 }
 
@@ -265,7 +265,7 @@ function fuzzyMatch(text, pattern) {
 function shouldUseLocalData(question) {
   const lowerQuestion = question.toLowerCase().trim();
   const trimmedLower = lowerQuestion.trim();
-  
+
   // Exact single-word matches (highest priority)
   if (trimmedLower === 'project' || trimmedLower === 'projects') {
     if (LOCAL_ANSWERS.projects) {
@@ -273,24 +273,24 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.projects.answer };
     }
   }
-  
+
   if (trimmedLower === 'skill' || trimmedLower === 'skills') {
     if (LOCAL_ANSWERS.skills) {
       devLog('📦 Matched basic skills query:', question);
       return { useLocal: true, answer: LOCAL_ANSWERS.skills.answer };
     }
   }
-  
+
   if (trimmedLower === 'experience' || trimmedLower === 'work' || trimmedLower === 'job') {
     if (LOCAL_ANSWERS.experience) {
       devLog('📦 Matched basic experience query:', question);
       return { useLocal: true, answer: LOCAL_ANSWERS.experience.answer };
     }
   }
-  
+
   // Common question patterns for skills
   const skillsPatterns = [
-    'skill', 'skills', 'technology', 'technologies', 'tech stack', 
+    'skill', 'skills', 'technology', 'technologies', 'tech stack',
     'what can he do', 'what does he know', 'what technologies',
     'what are his skills', 'tell me about skills', 'show me skills',
     'his skills', 'his skill', 'technical skills', 'tech skills'
@@ -301,7 +301,7 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.skills.answer };
     }
   }
-  
+
   // Common question patterns for projects
   const projectsPatterns = [
     'project', 'projects', 'work', 'works', 'built', 'created',
@@ -314,7 +314,7 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.projects.answer };
     }
   }
-  
+
   // Common question patterns for experience
   const experiencePatterns = [
     'experience', 'work experience', 'job', 'employment', 'career',
@@ -330,7 +330,7 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.experience.answer };
     }
   }
-  
+
   // Education patterns
   const educationPatterns = [
     'education', 'degree', 'qualification', 'university', 'college',
@@ -342,7 +342,7 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.education.answer };
     }
   }
-  
+
   // Resume patterns
   const resumePatterns = [
     'resume', 'cv', 'curriculum vitae', 'download resume', 'get resume'
@@ -353,7 +353,7 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.resume.answer };
     }
   }
-  
+
   // Simple greetings only (no portfolio keywords)
   const greetingKeywords = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
   if (greetingKeywords.some(keyword => trimmedLower === keyword || trimmedLower.startsWith(keyword + ' '))) {
@@ -364,14 +364,14 @@ function shouldUseLocalData(question) {
       return { useLocal: true, answer: LOCAL_ANSWERS.greeting.answer };
     }
   }
-  
+
   // For complex/analytical questions, let Gemini handle it
   // This includes:
   // - "How many skills?" (analytical)
   // - "What's his best project?" (subjective)
   // - "What can he help with?" (requires reasoning)
   // - Questions requiring calculations or comparisons
-  
+
   devLog('🤖 Sending to Gemini for AI understanding:', question);
   return { useLocal: false };
 }
@@ -404,29 +404,29 @@ app.post('/api/ask', async (req, res) => {
     }
 
     let trimmedQuestion = question.trim();
-    
+
     // Check if question is only emojis
     const emojiOnlyRegex = /^[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]+$/gu;
     const isOnlyEmoji = emojiOnlyRegex.test(trimmedQuestion) && trimmedQuestion.length <= 10;
-    
+
     if (isOnlyEmoji) {
       // Friendly response for emoji-only messages
-      return res.json({ 
+      return res.json({
         response: "I see you sent an emoji! 😊 Feel free to ask me about Sourav Kumar's skills, projects, experience, education, or resume. What would you like to know?",
         source: 'local'
       });
     }
-    
+
     // Remove emojis from question for processing (but keep original for context)
     const questionWithoutEmoji = trimmedQuestion.replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
-    
+
     // Use question without emoji for matching, but keep original for Gemini context
     const questionForMatching = questionWithoutEmoji || trimmedQuestion;
     trimmedQuestion = questionForMatching;
-    
+
     // If after removing emoji, question is empty, provide helpful response
     if (!trimmedQuestion) {
-      return res.json({ 
+      return res.json({
         response: "I see you sent a message! Feel free to ask me about Sourav Kumar's skills, projects, experience, education, or resume. What would you like to know?",
         source: 'local'
       });
@@ -435,15 +435,15 @@ app.post('/api/ask', async (req, res) => {
     // QUOTA SAFETY: Check if we can answer from local data first
     devLog('🔍 Checking question:', trimmedQuestion);
     const localCheck = shouldUseLocalData(trimmedQuestion);
-    
+
     if (localCheck.useLocal) {
       devLog('📦 Using local data (saving quota):', localCheck.answer.substring(0, 50) + '...');
-      return res.json({ 
+      return res.json({
         response: localCheck.answer,
         source: 'local'
       });
     }
-    
+
     devLog('⚠️ No local match found for:', trimmedQuestion);
 
     // Only call Gemini for unique/analytical questions
@@ -451,12 +451,12 @@ app.post('/api/ask', async (req, res) => {
       // If no model, try to provide a relevant local answer
       const fallbackCheck = shouldUseLocalData(trimmedQuestion);
       if (fallbackCheck.useLocal) {
-        return res.json({ 
+        return res.json({
           response: fallbackCheck.answer,
           source: 'local'
         });
       }
-      return res.status(503).json({ 
+      return res.status(503).json({
         error: 'AI service is not available. Here\'s what I can tell you instead.',
         fallback: LOCAL_ANSWERS.skills.answer
       });
@@ -471,13 +471,13 @@ app.post('/api/ask', async (req, res) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     let text = await response.text();
-    
+
     // Clean up the response (remove markdown if any)
     text = text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '').trim();
-    
+
     devLog('✅ Gemini response received, length:', text.length);
 
-    res.json({ 
+    res.json({
       response: text,
       source: 'gemini'
     });
@@ -485,28 +485,28 @@ app.post('/api/ask', async (req, res) => {
   } catch (error) {
     devError('❌ Error in /api/ask:', error);
     devError('Error details:', error.message, error.status);
-    
+
     // ALWAYS try to answer from local data as fallback before showing error
     const fallbackCheck = shouldUseLocalData(trimmedQuestion);
     if (fallbackCheck.useLocal) {
       devLog('📦 Using local data as fallback after error');
-      return res.json({ 
+      return res.json({
         response: fallbackCheck.answer,
         source: 'local-fallback'
       });
     }
-    
+
     // Handle quota exceeded error
     if (error.status === 429 || (error.message && error.message.includes('quota'))) {
       // Still try local data first
       const quotaFallback = shouldUseLocalData(trimmedQuestion);
       if (quotaFallback.useLocal) {
-        return res.json({ 
+        return res.json({
           response: quotaFallback.answer,
           source: 'local-fallback'
         });
       }
-      return res.status(429).json({ 
+      return res.status(429).json({
         error: 'I\'m having a moment, but I can still help!',
         fallback: LOCAL_ANSWERS.skills.answer,
         source: 'fallback'
@@ -518,12 +518,12 @@ app.post('/api/ask', async (req, res) => {
       // Still try local data first
       const keyFallback = shouldUseLocalData(trimmedQuestion);
       if (keyFallback.useLocal) {
-        return res.json({ 
+        return res.json({
           response: keyFallback.answer,
           source: 'local-fallback'
         });
       }
-      return res.status(401).json({ 
+      return res.status(401).json({
         error: 'I\'m having a moment, but I can still help!',
         fallback: LOCAL_ANSWERS.skills.answer,
         source: 'fallback'
@@ -533,13 +533,13 @@ app.post('/api/ask', async (req, res) => {
     // Generic error - try to provide relevant local answer based on keywords
     const lowerErrorQuestion = trimmedQuestion.toLowerCase();
     let relevantAnswer;
-    
+
     // If no local match, provide relevant answer based on keywords
     if (lowerErrorQuestion.includes('resume') || lowerErrorQuestion.includes('cv')) {
       relevantAnswer = LOCAL_ANSWERS.resume?.answer;
-    } else if (lowerErrorQuestion.includes('education') || lowerErrorQuestion.includes('degree') || 
-               lowerErrorQuestion.includes('college') || lowerErrorQuestion.includes('university') ||
-               lowerErrorQuestion.includes('btech') || lowerErrorQuestion.includes('graduation')) {
+    } else if (lowerErrorQuestion.includes('education') || lowerErrorQuestion.includes('degree') ||
+      lowerErrorQuestion.includes('college') || lowerErrorQuestion.includes('university') ||
+      lowerErrorQuestion.includes('btech') || lowerErrorQuestion.includes('graduation')) {
       relevantAnswer = LOCAL_ANSWERS.education?.answer;
     } else if (lowerErrorQuestion.includes('company')) {
       relevantAnswer = lowerErrorQuestion.includes('current') ? LOCAL_ANSWERS.currentCompany?.answer : LOCAL_ANSWERS.firstCompany?.answer;
@@ -552,16 +552,16 @@ app.post('/api/ask', async (req, res) => {
     } else {
       relevantAnswer = LOCAL_ANSWERS.skills?.answer || LOCAL_ANSWERS.experience?.answer;
     }
-    
+
     // If we have a relevant answer, return it instead of error
     if (relevantAnswer) {
-      return res.json({ 
+      return res.json({
         response: relevantAnswer,
         source: 'fallback'
       });
     }
-    
-    res.status(500).json({ 
+
+    res.status(500).json({
       error: 'I\'m having a moment, but I can still help!',
       fallback: LOCAL_ANSWERS.skills.answer,
       source: 'fallback'
@@ -571,8 +571,8 @@ app.post('/api/ask', async (req, res) => {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
+  res.json({
+    status: 'ok',
     timestamp: new Date().toISOString(),
     geminiAvailable: !!model
   });

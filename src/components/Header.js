@@ -43,20 +43,20 @@ const Header = () => {
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
             </button>
           </div>
           <div id="nav-content" className="desktop-nav overflow-x-auto scrollbar-hide">
@@ -128,8 +128,8 @@ const Header = () => {
               </li>
               <li className="flex-shrink-0">
                 <a
-                  href="/Sourav Kumar CV.pdf"
-                  download
+                  href="/Sourav Kumar.pdf"
+                  download="Sourav_Kumar.pdf"
                   className="resume-button px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 whitespace-nowrap"
                 >
                   <i className="fa-solid fa-file-arrow-down"></i>
@@ -243,8 +243,8 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="/Sourav Kumar CV.pdf"
-              download
+              href="/Sourav Kumar.pdf"
+              download="Sourav_Kumar.pdf"
               className="resume-button mt-4 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 justify-center"
             >
               <i className="fa-solid fa-file-arrow-down"></i>

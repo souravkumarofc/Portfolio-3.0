@@ -1,1392 +1,910 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sourav Kumar</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <link rel="icon" type="image/png" sizes="512x512" href="./images/favicon-512.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./images/favicon-192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16.png" />
-    <link rel="shortcut icon" type="image/png" href="./images/favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon-192.png" />
-    <style>
-      .font-playfair {
-        font-family: "Playfair Display", serif;
-      }
-      .font-inter {
-        font-family: "Inter", sans-serif;
-      }
-      .gradient-bg {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      }
-      .card-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .card-hover:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-      }
-      .skill-card {
-        transition: all 0.3s ease;
-        background: linear-gradient(145deg, #ffffff, #f8fafc);
-      }
-      .skill-card:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.12);
-      }
-      .hero-pattern {
-        background-image: radial-gradient(
-          circle at 25px 25px,
-          rgba(139, 92, 246, 0.06) 2px,
-          transparent 0
-        );
-        background-size: 50px 50px;
-      }
-      .section-divider {
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
-      }
-      .off-canvas-menu {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        height: 100%;
-        width: 280px;
-        background: #fff;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 50;
-        transition: left 0.3s ease-in-out;
-        padding-top: 2rem;
-      }
-      .off-canvas-menu.active {
-        left: 0;
-      }
-      .mobile-menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 40;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-      }
-      .mobile-menu-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-      .close-menu-btn {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-      }
-      @media (max-width: 767px) {
-        .desktop-nav {
-          display: none;
-        }
-      }
-      @media (min-width: 768px) {
-        .mobile-nav,
-        .mobile-menu-button {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body class="bg-background text-foreground font-inter scroll-smooth">
-    <header
-      class="w-full bg-background/95 backdrop-blur-sm shadow-sm z-50 top-0 border-b border-border"
-    >
-      <nav
-        class="container mx-auto flex flex-row justify-between items-center py-4 px-4 md:px-6"
-      >
-        <div
-          class="text-2xl font-playfair font-bold text-primary tracking-tight"
-        >
-          Sourav Kumar
-        </div>
-        <button id="mobile-menu-button" class="md:hidden">
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-        </button>
-        <div id="nav-content" class="desktop-nav">
-          <ul class="flex flex-row space-x-8 items-center">
-            <li>
-              <a
-                href="#hero"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="#about"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >About</a
-              >
-            </li>
-            <li>
-              <a
-                href="#education"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Education</a
-              >
-            </li>
-            <li>
-              <a
-                href="#experience"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Experience</a
-              >
-            </li>
-            <li>
-              <a
-                href="#skills"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Skills</a
-              >
-            </li>
-            <li>
-              <a
-                href="#projects"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Projects</a
-              >
-            </li>
-            <li>
-              <a
-                href="#contact"
-                class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium"
-                >Contact</a
-              >
-            </li>
-            <li>
-              <a
-                href="Sourav Kumar CV.pdf"
-                download
-                class="px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2"
-              >
-                <i class="fa-solid fa-file-arrow-down"></i>
-                <span>Resume</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
 
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-    <div id="mobile-menu" class="off-canvas-menu">
-      <button id="close-menu-btn" class="close-menu-btn">
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sourav Kumar</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./images/favicon-512.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16.png" />
+  <link rel="shortcut icon" type="image/png" href="./images/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon-192.png" />
+  <style>
+    .font-playfair {
+      font-family: "Playfair Display", serif;
+    }
+
+    .font-inter {
+      font-family: "Inter", sans-serif;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .skill-card {
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.12);
+    }
+
+    .hero-pattern {
+      background-image: radial-gradient(circle at 25px 25px,
+          rgba(139, 92, 246, 0.06) 2px,
+          transparent 0);
+      background-size: 50px 50px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+    }
+
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      width: 280px;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      transition: left 0.3s ease-in-out;
+      padding-top: 2rem;
+    }
+
+    .off-canvas-menu.active {
+      left: 0;
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .close-menu-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    @media (max-width: 767px) {
+      .desktop-nav {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) {
+
+      .mobile-nav,
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground font-inter scroll-smooth">
+  <header class="w-full bg-background/95 backdrop-blur-sm shadow-sm z-50 top-0 border-b border-border">
+    <nav class="container mx-auto flex flex-row justify-between items-center py-4 px-4 md:px-6">
+      <div class="text-2xl font-playfair font-bold text-primary tracking-tight">
+        Sourav Kumar
+      </div>
+      <button id="mobile-menu-button" class="md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
       </button>
-      <ul class="flex flex-col space-y-4 px-6 text-xl">
-        <li>
-          <a
-            href="#hero"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a
-            href="#about"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >About</a
-          >
-        </li>
-        <li>
-          <a
-            href="#education"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Education</a
-          >
-        </li>
-        <li>
-          <a
-            href="#experience"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Experience</a
-          >
-        </li>
-        <li>
-          <a
-            href="#skills"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Skills</a
-          >
-        </li>
-        <li>
-          <a
-            href="#projects"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Projects</a
-          >
-        </li>
-        <li>
-          <a
-            href="#contact"
-            class="block py-2 hover:text-accent transition-colors duration-300"
-            >Contact</a
-          >
-        </li>
-        <li>
-          <a
-            href="Sourav Kumar CV.pdf"
-            download
-            class="mt-4 px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2 justify-center"
-          >
-            <i class="fa-solid fa-file-arrow-down"></i>
-            <span>Resume</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <section
-      id="hero"
-      class="pt-20 pb-32 flex flex-col items-center gradient-bg hero-pattern px-4 relative overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent"
-      ></div>
-      <div class="relative z-10 text-center max-w-4xl mx-auto">
-        <img
-          src="./images/pic.jpg"
-          alt="Sourav Kumar"
-          class="w-40 h-40 md:w-48 md:h-48 rounded-full shadow-2xl mb-8 object-cover border-4 border-white mx-auto hover:scale-105 transition-transform duration-500"
-        />
-        <h1
-          class="text-4xl md:text-6xl font-playfair font-bold mb-4 text-gray-800 tracking-tight leading-tight"
-        >
-          Sourav Kumar
-        </h1>
-        <h2 class="text-xl md:text-2xl text-gray-600 font-semibold mb-6">
-          Frontend Developer — Building Scalable React Applications
-        </h2>
-        <p
-          class="max-w-2xl mx-auto text-center text-gray-700 text-lg md:text-xl mb-10 leading-relaxed"
-        >
-        I build performant, accessible, and user-focused interfaces — translating complex product requirements into reliable, production-ready web experiences using React and TypeScript.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#projects"
-            class="px-8 py-4 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 hover:shadow-xl transition-all duration-300 font-semibold text-lg"
-            >View My Work</a
-          >
-          <a
-            href="#contact"
-            class="px-8 py-4 bg-white border-2 border-purple-600 text-purple-600 rounded-xl shadow-lg hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold text-lg"
-            >Contact Me</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="py-16 bg-gray-50 px-4">
-      <div class="container mx-auto max-w-2xl">
-        <h2
-          class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide"
-        >
-          About Me
-        </h2>
-        <p
-          class="text-lg md:text-xl text-center text-gray-700 leading-relaxed"
-        >
-          I'm <span class="font-bold text-blue-700">Sourav Kumar</span>, a
-          frontend developer with a solid foundation in React, TypeScript, and
-          modern web technologies. I enjoy translating complex ideas into
-          usable, accessible, and high-performance interfaces. I have production
-          experience building customer-facing apps and internal tools, focusing
-          on clean code, strong UX, and measurable results.
-        </p>
-      </div>
-    </section>
-
-    <section id="education" class="py-16 bg-white px-4">
-      <div class="container mx-auto max-w-3xl">
-        <h2
-          class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide"
-        >
-          Education
-        </h2>
-        <ol class="relative border-l border-blue-200 ml-4">
-          <li class="mb-10 ml-6">
-            <div
-              class="bg-gray-50 rounded-xl shadow p-6 hover:shadow-lg transition card-hover"
-            >
-              <h3
-                class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2"
-              >
-                <i class="fa-solid fa-graduation-cap"></i> B.Tech — Computer
-                Science & Engineering
-              </h3>
-              <p class="text-gray-700 mb-1">
-                Gandhi Engineering College (BPUT), Bhubaneswar
-              </p>
-              <p class="text-gray-500 text-sm mb-1">
-                2018 — 2022 • CGPA: 8.79
-              </p>
-              <ul class="list-disc ml-5 text-gray-600 text-sm">
-                <li>
-                  Strong foundation in algorithms, data structures, and software
-                  engineering
-                </li>
-                <li>Worked on multiple web projects during studies ships</li>
-              </ul>
-            </div>
+      <div id="nav-content" class="desktop-nav">
+        <ul class="flex flex-row space-x-8 items-center">
+          <li>
+            <a href="#hero"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Home</a>
           </li>
-        </ol>
+          <li>
+            <a href="#about"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">About</a>
+          </li>
+          <li>
+            <a href="#education"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Education</a>
+          </li>
+          <li>
+            <a href="#experience"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Experience</a>
+          </li>
+          <li>
+            <a href="#skills"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Skills</a>
+          </li>
+          <li>
+            <a href="#projects"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Projects</a>
+          </li>
+          <li>
+            <a href="#contact"
+              class="px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium">Contact</a>
+          </li>
+          <li>
+            <a href="Sourav Kumar.pdf" download="Sourav_Kumar.pdf"
+              class="px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2">
+              <i class="fa-solid fa-file-arrow-down"></i>
+              <span>Resume</span>
+            </a>
+          </li>
+        </ul>
       </div>
-    </section>
+    </nav>
+  </header>
 
-    <section id="experience" class="py-16 bg-gray-50 px-4">
-      <div class="container mx-auto max-w-4xl">
-        <h2
-          class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide"
-        >
-          Work Experience
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+  <div id="mobile-menu" class="off-canvas-menu">
+    <button id="close-menu-btn" class="close-menu-btn">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <ul class="flex flex-col space-y-4 px-6 text-xl">
+      <li>
+        <a href="#hero" class="block py-2 hover:text-accent transition-colors duration-300">Home</a>
+      </li>
+      <li>
+        <a href="#about" class="block py-2 hover:text-accent transition-colors duration-300">About</a>
+      </li>
+      <li>
+        <a href="#education" class="block py-2 hover:text-accent transition-colors duration-300">Education</a>
+      </li>
+      <li>
+        <a href="#experience" class="block py-2 hover:text-accent transition-colors duration-300">Experience</a>
+      </li>
+      <li>
+        <a href="#skills" class="block py-2 hover:text-accent transition-colors duration-300">Skills</a>
+      </li>
+      <li>
+        <a href="#projects" class="block py-2 hover:text-accent transition-colors duration-300">Projects</a>
+      </li>
+      <li>
+        <a href="#contact" class="block py-2 hover:text-accent transition-colors duration-300">Contact</a>
+      </li>
+      <li>
+        <a href="Sourav Kumar.pdf" download="Sourav_Kumar.pdf"
+          class="mt-4 px-6 py-3 bg-accent text-accent-foreground rounded-xl shadow-lg hover:bg-accent/90 hover:shadow-xl transition-all duration-300 font-semibold flex items-center gap-2 justify-center">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Resume</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <section id="hero"
+    class="pt-20 pb-32 flex flex-col items-center gradient-bg hero-pattern px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent"></div>
+    <div class="relative z-10 text-center max-w-4xl mx-auto">
+      <img src="./images/pic.jpg" alt="Sourav Kumar"
+        class="w-40 h-40 md:w-48 md:h-48 rounded-full shadow-2xl mb-8 object-cover border-4 border-white mx-auto hover:scale-105 transition-transform duration-500" />
+      <h1 class="text-4xl md:text-6xl font-playfair font-bold mb-4 text-gray-800 tracking-tight leading-tight">
+        Sourav Kumar
+      </h1>
+      <h2 class="text-xl md:text-2xl text-gray-600 font-semibold mb-6">
+        Frontend Developer — Building Scalable React Applications
+      </h2>
+      <p class="max-w-2xl mx-auto text-center text-gray-700 text-lg md:text-xl mb-10 leading-relaxed">
+        I build performant, accessible, and user-focused interfaces — translating complex product requirements into
+        reliable, production-ready web experiences using React and TypeScript.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#projects"
+          class="px-8 py-4 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 hover:shadow-xl transition-all duration-300 font-semibold text-lg">View
+          My Work</a>
+        <a href="#contact"
+          class="px-8 py-4 bg-white border-2 border-purple-600 text-purple-600 rounded-xl shadow-lg hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold text-lg">Contact
+          Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-16 bg-gray-50 px-4">
+    <div class="container mx-auto max-w-2xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide">
+        About Me
+      </h2>
+      <p class="text-lg md:text-xl text-center text-gray-700 leading-relaxed">
+        I'm <span class="font-bold text-blue-700">Sourav Kumar</span>, a
+        frontend developer with a solid foundation in React, TypeScript, and
+        modern web technologies. I enjoy translating complex ideas into
+        usable, accessible, and high-performance interfaces. I have production
+        experience building customer-facing apps and internal tools, focusing
+        on clean code, strong UX, and measurable results.
+      </p>
+    </div>
+  </section>
+
+  <section id="education" class="py-16 bg-white px-4">
+    <div class="container mx-auto max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide">
+        Education
+      </h2>
+      <ol class="relative border-l border-blue-200 ml-4">
+        <li class="mb-10 ml-6">
+          <div class="bg-gray-50 rounded-xl shadow p-6 hover:shadow-lg transition card-hover">
+            <h3 class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap"></i> B.Tech — Computer
+              Science & Engineering
+            </h3>
+            <p class="text-gray-700 mb-1">
+              Gandhi Engineering College (BPUT), Bhubaneswar
+            </p>
+            <p class="text-gray-500 text-sm mb-1">
+              2018 — 2022 • CGPA: 8.79
+            </p>
+            <ul class="list-disc ml-5 text-gray-600 text-sm">
+              <li>
+                Strong foundation in algorithms, data structures, and software
+                engineering
+              </li>
+              <li>Worked on multiple web projects during studies ships</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="experience" class="py-16 bg-gray-50 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-wide">
+        Work Experience
+      </h2>
+
+      <div class="grid grid-cols-1 gap-8">
+        <div class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition">
+          <div
+            class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+            <i class="fa-solid fa-building text-purple-600"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-briefcase"></i> Analyst — Capgemini
+            </h3>
+            <p class="text-gray-700 mb-1">Dec 2022 — Jan 2025</p>
+            <ul class="list-disc ml-5 text-gray-600 text-sm">
+              <li>
+                Developed a customer service chatbot and an AI-powered
+                ticketing system for enterprise clients (e.g., Panasonic) that
+                reduced manual workload and improved response times.
+              </li>
+              <li>
+                Worked on integrating NLU for ticket generation and automated
+                workflows to streamline support processes.
+              </li>
+              <li>
+                Collaborated with cross-functional teams to design and ship
+                production-ready frontend modules using React and state
+                management libraries.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition">
+          <div
+            class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+            <i class="fa-solid fa-laptop-code text-purple-600"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-briefcase"></i> Full Stack Developer —
+              Worksbot
+            </h3>
+            <p class="text-gray-700 mb-1">Jan 2022 — Mar 2022</p>
+            <ul class="list-disc ml-5 text-gray-600 text-sm">
+              <li>
+                Built full-stack features for internal tools using React and
+                backend APIs.
+              </li>
+              <li>
+                Worked on authentication flows and data synchronization
+                between services.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition">
+          <div
+            class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+            <i class="fa-solid fa-briefcase text-purple-600"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-briefcase"></i> Front End Developer —
+              Lyearn
+            </h3>
+            <p class="text-gray-700 mb-1">Jun 2020 — Mar 2021</p>
+            <ul class="list-disc ml-5 text-gray-600 text-sm">
+              <li>
+                Implemented responsive UI components and improved
+                accessibility across several pages.
+              </li>
+              <li>
+                Collaborated with designers to translate Figma designs into
+                production-ready React components.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 bg-white px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          Featured Projects
         </h2>
-
-        <div class="grid grid-cols-1 gap-8">
-          <div
-            class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition"
-          >
-            <div
-              class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100"
-            >
-              <i class="fa-solid fa-building text-purple-600"></i>
-            </div>
-            <div>
-              <h3
-                class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2"
-              >
-                <i class="fa-solid fa-briefcase"></i> Analyst — Capgemini
-              </h3>
-              <p class="text-gray-700 mb-1">Dec 2022 — Jan 2025</p>
-              <ul class="list-disc ml-5 text-gray-600 text-sm">
-                <li>
-                  Developed a customer service chatbot and an AI-powered
-                  ticketing system for enterprise clients (e.g., Panasonic) that
-                  reduced manual workload and improved response times.
-                </li>
-                <li>
-                  Worked on integrating NLU for ticket generation and automated
-                  workflows to streamline support processes.
-                </li>
-                <li>
-                  Collaborated with cross-functional teams to design and ship
-                  production-ready frontend modules using React and state
-                  management libraries.
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition"
-          >
-            <div
-              class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100"
-            >
-              <i class="fa-solid fa-laptop-code text-purple-600"></i>
-            </div>
-            <div>
-              <h3
-                class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2"
-              >
-                <i class="fa-solid fa-briefcase"></i> Full Stack Developer —
-                Worksbot
-              </h3>
-              <p class="text-gray-700 mb-1">Jan 2022 — Mar 2022</p>
-              <ul class="list-disc ml-5 text-gray-600 text-sm">
-                <li>
-                  Built full-stack features for internal tools using React and
-                  backend APIs.
-                </li>
-                <li>
-                  Worked on authentication flows and data synchronization
-                  between services.
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            class="bg-white rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition"
-          >
-            <div
-              class="flex-shrink-0 w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100"
-            >
-              <i class="fa-solid fa-briefcase text-purple-600"></i>
-            </div>
-            <div>
-              <h3
-                class="font-bold text-lg text-blue-700 mb-1 flex items-center gap-2"
-              >
-                <i class="fa-solid fa-briefcase"></i> Front End Developer —
-                Lyearn
-              </h3>
-              <p class="text-gray-700 mb-1">Jun 2020 — Mar 2021</p>
-              <ul class="list-disc ml-5 text-gray-600 text-sm">
-                <li>
-                  Implemented responsive UI components and improved
-                  accessibility across several pages.
-                </li>
-                <li>
-                  Collaborated with designers to translate Figma designs into
-                  production-ready React components.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="py-20 bg-white px-4">
-      <div class="container mx-auto max-w-6xl">
-        <div class="text-center mb-12">
-          <h2
-            class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800"
-          >
-            Featured Projects
-          </h2>
-          <div class="section-divider w-24 mx-auto mb-6"></div>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            A selection of projects that highlight my frontend and full-stack
-            capabilities.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/chef.png"
-                alt="Chef Claude"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                Chef Claude — AI-Powered Recipe Generator
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                A personal frontend project that generates custom recipes based
-                on a list of ingredients using the OpenRouter AI API. Focuses on
-                dynamic AI content generation, responsive design, and robust API
-                handling.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >React</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >OpenRouter API</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Netlify</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc/ChefClaude"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://ai-chefclaude.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/meme.png"
-                alt="Meme Generator"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                Meme Generator — Web App
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                A dynamic meme generator built with React and JavaScript that
-                fetches real-time meme templates from an API and allows users to
-                add custom text, download, and share their creations. This
-                project showcases dynamic API handling and DOM manipulation with
-                a focus on a responsive UI.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >React</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >JavaScript</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Netlify</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc/MemeGenerator"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://generate-trendingmemes.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/tenzies.png"
-                alt="Roll Dice Tenzies"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                Roll Dice Tenzies — Interactive Game
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                An interactive dice game built with React.js that challenges
-                players to roll all ten dice until they all show the same
-                number. It features state management with React Hooks,
-                component-based rendering, and accessibility features like
-                keyboard focus and screen reader support for an improved UX.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >React.js</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >JavaScript</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Component-Based Design</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc/Tenzies"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://rolldice-tenzies.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/Inventos.png"
-                alt="Inventos"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                Inventos — Inventory Management Software
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                A full-stack project designed as a manufacturing industry
-                inventory management software. It was built using a combination
-                of frontend technologies like HTML5, CSS, and JavaScript, with a
-                Python/Django backend.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >HTML5</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >CSS3</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >JavaScript</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Python</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Django</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc?tab=repositories"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://inventos.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/travel.png"
-                alt="My Travel Journey"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                My Travel Journey — Portfolio Project
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                A personal portfolio-style project built with React that
-                showcases a collection of travel destinations. This application
-                demonstrates the use of React components for structuring content
-                and dynamic rendering of data from a local JSON file. Book your
-                next travel destination with "Travel Journey".
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >React</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >JavaScript</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >Netlify</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc/travel_journey"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://travel-with-myjourney.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group"
-          >
-            <div
-              class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56"
-            >
-              <img
-                src="./images/covid-19.png"
-                alt="Covid-19"
-                class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3
-                class="font-playfair font-bold text-xl mb-3 text-gray-800"
-              >
-                Covid-19 — Data Tracker
-              </h3>
-              <p class="text-gray-700 mb-4 leading-relaxed">
-                A web application that provides a real-time tracking of COVID-19
-                data, with a focus on India. The project integrates with public
-                APIs to display statistics on confirmed cases, recoveries, and
-                deaths, and may include features related to vaccine
-                registration, such as the Co-WIN platform.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >HTML</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >CSS</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >JavaScript</span
-                >
-                <span
-                  class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
-                  >API Integration</span
-                >
-              </div>
-              <div class="flex gap-4">
-                <a
-                  href="https://github.com/souravkumarofc"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-code"></i>
-                  <span>Code</span>
-                </a>
-                <a
-                  href="https://covid19-cowin.netlify.app/"
-                  target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold"
-                >
-                  <i class="fa-solid fa-rocket"></i>
-                  <span>Live Demo</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="py-20 bg-white px-4">
-      <div class="container mx-auto max-w-6xl">
-        <div class="text-center mb-16">
-          <h2
-            class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800"
-          >
-            Technical Skills
-          </h2>
-          <div class="section-divider w-24 mx-auto mb-6"></div>
-          
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >TypeScript</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-square-js text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >JavaScript</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-html5 text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >HTML5</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-html5 text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >CSS3</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-react text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >React.js</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Next.js</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Node.js</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Express.js</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-chart-line text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Redux</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-bootstrap text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Bootstrap</span
-            >
-          </div>
-
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-leaf text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >MongoDB</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-database text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Firebase</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-vial text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Testing (Jest)</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-briefcase text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >ServiceNow</span
-            >
-          </div>
-          
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-paper-plane text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Postman</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-java text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Java</span
-            >
-          </div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-brands fa-python text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >Python(Django)</span
-            >
-          </div>
-          <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-solid fa-cloud-arrow-up text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >RESTful APIs</span
-  >
-</div>
-<div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-solid fa-key text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >JWT</span
-  >
-</div>
-
-<div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-brands fa-github text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >Git / GitHub</span
-  >
-</div>
-
-<div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-solid fa-tasks text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >Agile / Scrum</span
-  >
-</div>
-<div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-brands fa-jira text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >Jira</span
-  >
-</div>
-
-<div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
-  <i
-    class="fa-solid fa-database text-4xl md:text-5xl mb-4 text-purple-600"
-  ></i>
-  <span class="font-semibold text-sm md:text-base text-gray-700"
-    >PostgreSQL</span
-  >
-</div>
-          <div
-            class="skill-card rounded-2xl p-6 text-center border border-gray-200"
-          >
-            <i
-              class="fa-solid fa-code text-4xl md:text-5xl mb-4 text-purple-600"
-            ></i>
-            <span class="font-semibold text-sm md:text-base text-gray-700"
-              >VS Code</span
-            >
-          </div>
-
-          
-        </div>
-      </div>
-    </section>
-
-    <section id="expertise" class="py-20 gradient-bg px-4">
-      <div class="container mx-auto max-w-6xl">
-        <div class="text-center mb-16">
-          <h2
-            class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800"
-          >
-            What I Do
-          </h2>
-          <div class="section-divider w-24 mx-auto mb-6"></div>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Frontend engineering, enterprise solutions, and building
-            user-focused products.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div
-            class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group"
-          >
-            <div
-              class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300"
-            >
-              <i class="fa-solid fa-laptop-code text-2xl text-purple-600"></i>
-            </div>
-            <h3
-              class="font-playfair font-bold text-2xl mb-4 text-gray-800"
-            >
-              Frontend Engineering
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
-              Building robust, accessible React applications with clean
-              component architecture and strong UX focus.
-            </p>
-          </div>
-
-          <div
-            class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group"
-          >
-            <div
-              class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300"
-            >
-              <i class="fa-solid fa-building text-2xl text-purple-600"></i>
-            </div>
-            <h3
-              class="font-playfair font-bold text-2xl mb-4 text-gray-800"
-            >
-              Enterprise Solutions
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
-              Developing and customizing enterprise applications on platforms
-              like ServiceNow, focusing on workflow automation and user
-              experience.
-            </p>
-          </div>
-
-          <div
-            class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group"
-          >
-            <div
-              class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300"
-            >
-              <i class="fa-solid fa-users text-2xl text-purple-600"></i>
-            </div>
-            <h3
-              class="font-playfair font-bold text-2xl mb-4 text-gray-800"
-            >
-              Product-minded Development
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
-              Shipping features that solve user problems and align with business
-              goals—prioritizing reliability and clarity.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="py-20 bg-white px-4">
-      <div class="container mx-auto max-w-4xl">
-        <div class="text-center mb-16">
-          <h2
-            class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800"
-          >
-            Contact Me
-          </h2>
-          <div class="section-divider w-24 mx-auto mb-6"></div>
-          <p class="text-lg text-gray-600">
-            Let's discuss your next project
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div
-            class="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200"
-          >
-            <form class="space-y-6" id="contactForm">
-              <div>
-                <label
-                  for="name"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Name *</label
-                >
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your Name"
-                  class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Email *</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="your.email@example.com"
-                  class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="subject"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Subject</label
-                >
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="What's this about?"
-                  class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
-                />
-              </div>
-              <div>
-                <label
-                  for="message"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Message *</label
-                >
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project or inquiry..."
-                  class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="w-full bg-purple-600 text-white p-4 rounded-xl shadow-lg hover:bg-purple-700 hover:shadow-xl transition-all duration-300 font-semibold text-lg"
-              >
-                <span id="submitText">Send Message</span>
-                <span id="submitLoading" class="hidden">Sending...</span>
-              </button>
-              <div
-                id="formMessage"
-                class="hidden mt-4 p-3 rounded-xl text-center"
-              ></div>
-            </form>
-          </div>
-
-          <div class="space-y-8">
-            <div
-              class="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200"
-            >
-              <h3
-                class="font-playfair font-bold text-2xl mb-6 text-gray-800"
-              >
-                Get In Touch
-              </h3>
-              <p class="text-gray-700 mb-8 leading-relaxed">
-                Ready to start your next project? I'd love to hear from you.
-                Let's create something amazing together.
-              </p>
-
-              <div class="space-y-6">
-                <a
-                  href="mailto:souravkumar.ofc@gmail.com"
-                  class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
-                >
-                  <div
-                    class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300"
-                  >
-                    <i class="fa-solid fa-envelope text-purple-600"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold">Email</p>
-                    <p class="text-sm text-gray-600">
-                      souravkumar.ofc@gmail.com
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/souravkumarofc/"
-                  target="_blank"
-                  class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
-                >
-                  <div
-                    class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300"
-                  >
-                    <i class="fa-brands fa-linkedin text-purple-600"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold">LinkedIn</p>
-                    <p class="text-sm text-gray-600">Connect with me</p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://github.com/souravkumarofc/"
-                  target="_blank"
-                  class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group"
-                >
-                  <div
-                    class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300"
-                  >
-                    <i class="fa-brands fa-github text-purple-600"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold">GitHub</p>
-                    <p class="text-sm text-gray-600">
-                      View my repositories
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer
-      class="py-8 text-center text-gray-600 bg-gray-50 border-t border-gray-200"
-    >
-      <div class="container mx-auto px-4">
-        <p class="font-medium">
-          &copy; 2025 Sourav Kumar. All rights reserved.
+        <div class="section-divider w-24 mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          A selection of projects that highlight my frontend and full-stack
+          capabilities.
         </p>
       </div>
-    </footer>
-    <script src="main.js"></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-    ></script>
-    <script type="text/javascript">
-      (function () {
-        emailjs.init({
-          publicKey: "IT2nU9R5nZ7Ld7NoV",
-        });
-      })();
-    </script>
-  </body>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/chef.png" alt="Chef Claude"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              Chef Claude — AI-Powered Recipe Generator
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              A personal frontend project that generates custom recipes based
+              on a list of ingredients using the OpenRouter AI API. Focuses on
+              dynamic AI content generation, responsive design, and robust API
+              handling.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">React</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">OpenRouter
+                API</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Netlify</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc/ChefClaude" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://ai-chefclaude.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/meme.png" alt="Meme Generator"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              Meme Generator — Web App
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              A dynamic meme generator built with React and JavaScript that
+              fetches real-time meme templates from an API and allows users to
+              add custom text, download, and share their creations. This
+              project showcases dynamic API handling and DOM manipulation with
+              a focus on a responsive UI.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">React</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">JavaScript</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Netlify</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc/MemeGenerator" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://generate-trendingmemes.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/tenzies.png" alt="Roll Dice Tenzies"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              Roll Dice Tenzies — Interactive Game
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              An interactive dice game built with React.js that challenges
+              players to roll all ten dice until they all show the same
+              number. It features state management with React Hooks,
+              component-based rendering, and accessibility features like
+              keyboard focus and screen reader support for an improved UX.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">React.js</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">JavaScript</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Component-Based
+                Design</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc/Tenzies" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://rolldice-tenzies.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/Inventos.png" alt="Inventos"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              Inventos — Inventory Management Software
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              A full-stack project designed as a manufacturing industry
+              inventory management software. It was built using a combination
+              of frontend technologies like HTML5, CSS, and JavaScript, with a
+              Python/Django backend.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">HTML5</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">CSS3</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">JavaScript</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Python</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Django</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc?tab=repositories" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://inventos.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/travel.png" alt="My Travel Journey"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              My Travel Journey — Portfolio Project
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              A personal portfolio-style project built with React that
+              showcases a collection of travel destinations. This application
+              demonstrates the use of React components for structuring content
+              and dynamic rendering of data from a local JSON file. Book your
+              next travel destination with "Travel Journey".
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">React</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">JavaScript</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Netlify</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc/travel_journey" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://travel-with-myjourney.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-3xl shadow-lg border border-gray-200 overflow-hidden card-hover group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center h-56">
+            <img src="./images/covid-19.png" alt="Covid-19"
+              class="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">
+              Covid-19 — Data Tracker
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              A web application that provides a real-time tracking of COVID-19
+              data, with a focus on India. The project integrates with public
+              APIs to display statistics on confirmed cases, recoveries, and
+              deaths, and may include features related to vaccine
+              registration, such as the Co-WIN platform.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">HTML</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">CSS</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">JavaScript</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">API
+                Integration</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://github.com/souravkumarofc" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+              </a>
+              <a href="https://covid19-cowin.netlify.app/" target="_blank"
+                class="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 font-semibold">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Live Demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-20 bg-white px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          Technical Skills
+        </h2>
+        <div class="section-divider w-24 mx-auto mb-6"></div>
+
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">TypeScript</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-square-js text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">JavaScript</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-html5 text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">HTML5</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-html5 text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">CSS3</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-react text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">React.js</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Next.js</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Node.js</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-node-js text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Express.js</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-chart-line text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Redux</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-bootstrap text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Bootstrap</span>
+        </div>
+
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-leaf text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">MongoDB</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-database text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Firebase</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-vial text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Testing (Jest)</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-briefcase text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">ServiceNow</span>
+        </div>
+
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-paper-plane text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Postman</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-java text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Java</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-python text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Python(Django)</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-cloud-arrow-up text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">RESTful APIs</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-key text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">JWT</span>
+        </div>
+
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-github text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Git / GitHub</span>
+        </div>
+
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-tasks text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Agile / Scrum</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-brands fa-jira text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">Jira</span>
+        </div>
+
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-database text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">PostgreSQL</span>
+        </div>
+        <div class="skill-card rounded-2xl p-6 text-center border border-gray-200">
+          <i class="fa-solid fa-code text-4xl md:text-5xl mb-4 text-purple-600"></i>
+          <span class="font-semibold text-sm md:text-base text-gray-700">VS Code</span>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise" class="py-20 gradient-bg px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          What I Do
+        </h2>
+        <div class="section-divider w-24 mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Frontend engineering, enterprise solutions, and building
+          user-focused products.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group">
+          <div
+            class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300">
+            <i class="fa-solid fa-laptop-code text-2xl text-purple-600"></i>
+          </div>
+          <h3 class="font-playfair font-bold text-2xl mb-4 text-gray-800">
+            Frontend Engineering
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Building robust, accessible React applications with clean
+            component architecture and strong UX focus.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group">
+          <div
+            class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300">
+            <i class="fa-solid fa-building text-2xl text-purple-600"></i>
+          </div>
+          <h3 class="font-playfair font-bold text-2xl mb-4 text-gray-800">
+            Enterprise Solutions
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Developing and customizing enterprise applications on platforms
+            like ServiceNow, focusing on workflow automation and user
+            experience.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl shadow-lg card-hover border border-gray-200 group">
+          <div
+            class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors duration-300">
+            <i class="fa-solid fa-users text-2xl text-purple-600"></i>
+          </div>
+          <h3 class="font-playfair font-bold text-2xl mb-4 text-gray-800">
+            Product-minded Development
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Shipping features that solve user problems and align with business
+            goals—prioritizing reliability and clarity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 bg-white px-4">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800">
+          Contact Me
+        </h2>
+        <div class="section-divider w-24 mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600">
+          Let's discuss your next project
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200">
+          <form class="space-y-6" id="contactForm">
+            <div>
+              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your Name"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                required />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+              <input type="email" id="email" name="email" placeholder="your.email@example.com"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                required />
+            </div>
+            <div>
+              <label for="subject" class="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300" />
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project or inquiry..."
+                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 transition-all duration-300"
+                rows="5" required></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-purple-600 text-white p-4 rounded-xl shadow-lg hover:bg-purple-700 hover:shadow-xl transition-all duration-300 font-semibold text-lg">
+              <span id="submitText">Send Message</span>
+              <span id="submitLoading" class="hidden">Sending...</span>
+            </button>
+            <div id="formMessage" class="hidden mt-4 p-3 rounded-xl text-center"></div>
+          </form>
+        </div>
+
+        <div class="space-y-8">
+          <div class="bg-gray-50 rounded-3xl p-8 shadow-lg border border-gray-200">
+            <h3 class="font-playfair font-bold text-2xl mb-6 text-gray-800">
+              Get In Touch
+            </h3>
+            <p class="text-gray-700 mb-8 leading-relaxed">
+              Ready to start your next project? I'd love to hear from you.
+              Let's create something amazing together.
+            </p>
+
+            <div class="space-y-6">
+              <a href="mailto:souravkumar.ofc@gmail.com"
+                class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
+                  <i class="fa-solid fa-envelope text-purple-600"></i>
+                </div>
+                <div>
+                  <p class="font-semibold">Email</p>
+                  <p class="text-sm text-gray-600">
+                    souravkumar.ofc@gmail.com
+                  </p>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/souravkumarofc/" target="_blank"
+                class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
+                  <i class="fa-brands fa-linkedin text-purple-600"></i>
+                </div>
+                <div>
+                  <p class="font-semibold">LinkedIn</p>
+                  <p class="text-sm text-gray-600">Connect with me</p>
+                </div>
+              </a>
+
+              <a href="https://github.com/souravkumarofc/" target="_blank"
+                class="flex items-center space-x-4 text-gray-700 hover:text-purple-600 transition-colors duration-300 group">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
+                  <i class="fa-brands fa-github text-purple-600"></i>
+                </div>
+                <div>
+                  <p class="font-semibold">GitHub</p>
+                  <p class="text-sm text-gray-600">
+                    View my repositories
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 text-center text-gray-600 bg-gray-50 border-t border-gray-200">
+    <div class="container mx-auto px-4">
+      <p class="font-medium">
+        &copy; 2025 Sourav Kumar. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "IT2nU9R5nZ7Ld7NoV",
+      });
+    })();
+  </script>
+</body>
+
 </html>
