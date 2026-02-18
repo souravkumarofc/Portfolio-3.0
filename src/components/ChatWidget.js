@@ -436,7 +436,7 @@ Key highlights:
 
     // Resume
     if (lowerQuestion.includes('resume') || lowerQuestion.includes('cv')) {
-      return `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar.pdf" and can be downloaded by clicking the Resume button.`;
+      return `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "cv.pdf" and can be downloaded by clicking the Resume button.`;
     }
 
     // Count questions

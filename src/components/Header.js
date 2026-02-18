@@ -128,8 +128,8 @@ const Header = () => {
               </li>
               <li className="flex-shrink-0">
                 <a
-                  href="/Sourav Kumar.pdf"
-                  download="Sourav_Kumar.pdf"
+                  href="/cv.pdf"
+                  download="cv.pdf"
                   className="resume-button px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 whitespace-nowrap"
                 >
                   <i className="fa-solid fa-file-arrow-down"></i>
@@ -243,8 +243,8 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="/Sourav Kumar.pdf"
-              download="Sourav_Kumar.pdf"
+              href="/cv.pdf"
+              download="cv.pdf"
               className="resume-button mt-4 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 justify-center"
             >
               <i className="fa-solid fa-file-arrow-down"></i>

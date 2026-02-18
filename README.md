@@ -47,7 +47,7 @@ Portfolio-2.0-main/
 ├── public/
 │   ├── images/          # Image assets
 │   ├── index.html       # HTML template
-│   └── Sourav Kumar.pdf # Resume PDF
+│   └── cv.pdf # Resume PDF
 ├── src/
 │   ├── components/      # React components
 │   │   ├── Header.js

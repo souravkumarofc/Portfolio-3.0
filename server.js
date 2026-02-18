@@ -150,7 +150,7 @@ Frontend Developer — Lyearn (Jun 2020 – Mar 2021)
   },
   resume: {
     keywords: ['resume', 'cv', 'curriculum vitae', 'download resume', 'get resume', 'resume pdf', 'cv pdf', 'download cv'],
-    answer: `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar.pdf" and can be downloaded by clicking the Resume button.`
+    answer: `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "cv.pdf" and can be downloaded by clicking the Resume button.`
   },
   education: {
     keywords: ['education', 'educat', 'degree', 'qualification', 'qualifications', 'university', 'college', 'btech', 'b.tech', 'graduation', 'graduate', 'studied', 'study', 'cgpa', 'gpa'],
@@ -194,7 +194,7 @@ EDUCATION:
 - Strong foundation in algorithms, data structures, and software engineering
 - Worked on multiple web projects during studies
 
-RESUME: Available for download on the portfolio website via the "Resume" button in navigation menu (PDF: "Sourav Kumar.pdf")
+RESUME: Available for download on the portfolio website via the "Resume" button in navigation menu (PDF: "cv.pdf")
 
 YOUR ROLE & BEHAVIOR:
 You are an intelligent AI assistant that understands context, intent, and nuance. You should:
