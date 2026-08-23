@@ -84,7 +84,7 @@ const Contact = () => {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            Contact Me
+            Hire Me
           </h2>
           <div className="section-divider w-24 mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -199,7 +199,7 @@ const Contact = () => {
 
               <div className="space-y-6">
                 <a
-                  href="mailto:souravkumar.ofc@gmail.com"
+                  href="mailto:souravkumarjsr01@gmail.com"
                   className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
                 >
                   <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
@@ -208,7 +208,7 @@ const Contact = () => {
                   <div>
                     <p className="font-semibold">Email</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      souravkumar.ofc@gmail.com
+                      souravkumarjsr01@gmail.com
                     </p>
                   </div>
                 </a>

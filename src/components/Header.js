@@ -123,13 +123,13 @@ const Header = () => {
                   href="#contact"
                   className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
                 >
-                  Contact
+                  Hire Me
                 </a>
               </li>
               <li className="flex-shrink-0">
                 <a
-                  href="/cv.pdf"
-                  download="cv.pdf"
+                  href="/Sourav%20Kumar%20Resume.pdf"
+                  download="Sourav Kumar Resume.pdf"
                   className="resume-button px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 whitespace-nowrap"
                 >
                   <i className="fa-solid fa-file-arrow-down"></i>
@@ -238,13 +238,13 @@ const Header = () => {
               className="block py-2 hover:text-accent transition-colors duration-300"
               onClick={closeMenu}
             >
-              Contact
+              Hire Me
             </a>
           </li>
           <li>
             <a
-              href="/cv.pdf"
-              download="cv.pdf"
+              href="/Sourav%20Kumar%20Resume.pdf"
+              download="Sourav Kumar Resume.pdf"
               className="resume-button mt-4 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 justify-center"
             >
               <i className="fa-solid fa-file-arrow-down"></i>
