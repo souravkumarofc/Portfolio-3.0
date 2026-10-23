@@ -13,9 +13,18 @@ const Hero = () => (
           Software Developer · Full-Stack Engineer · AI Enthusiast
         </p>
 
-        <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-theme-primary mb-5">
+        <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-theme-primary mb-3">
           Hi, I&apos;m <span className="text-theme-accent">Sourav Kumar</span>
         </h1>
+
+        <div className="hero-education mb-6">
+          <p className="text-base md:text-lg font-semibold text-theme-secondary">
+            M.Tech in Artificial Intelligence
+          </p>
+          <p className="text-sm md:text-base text-theme-muted mt-1">
+            Indian Institute of Technology Jodhpur
+          </p>
+        </div>
 
         <p className="text-xl md:text-2xl text-theme-secondary font-medium leading-relaxed mb-6">
           I build scalable digital products where engineering meets thoughtful design.
@@ -24,7 +33,10 @@ const Hero = () => (
         <p className="text-base md:text-lg text-theme-muted leading-relaxed mb-8 max-w-2xl">
           Software Developer at Aimleap with 4+ years of experience across React, Next.js, TypeScript,
           Node.js, and REST APIs—shipping production features for wealth management, supply chain, and
-          enterprise platforms while pursuing M.Tech in AI at IIT Jodhpur.
+          enterprise platforms while pursuing{' '}
+          <strong className="font-semibold text-theme-secondary">
+            M.Tech in Artificial Intelligence at IIT Jodhpur.
+          </strong>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-8">

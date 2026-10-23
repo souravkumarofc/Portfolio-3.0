@@ -109,8 +109,13 @@ const Contact = () => {
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
               />
-              <figcaption className="contact-intro-caption text-theme-muted">
-                Sourav Kumar · Software Developer
+              <figcaption className="contact-intro-caption">
+                <span className="contact-intro-name">Sourav Kumar</span>
+                <span className="contact-intro-role text-theme-muted">Software Developer</span>
+                <span className="contact-intro-degree">M.Tech in Artificial Intelligence</span>
+                <span className="contact-intro-college text-theme-muted">
+                  Indian Institute of Technology Jodhpur
+                </span>
               </figcaption>
             </figure>
 
