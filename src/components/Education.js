@@ -1,37 +1,54 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
 
 const Education = () => {
+  const education = [
+    {
+      degree: 'M.Tech — Artificial Intelligence',
+      institution: 'Indian Institute of Technology Jodhpur',
+      period: '2026 — 2028',
+      highlights: [
+        'Pursuing advanced studies in artificial intelligence and machine learning',
+        'Building on 4+ years of industry experience in React and full-stack development',
+      ],
+    },
+    {
+      degree: 'B.Tech — Computer Science & Engineering',
+      institution: 'Gandhi Engineering College (BPUT), Bhubaneswar',
+      period: 'Aug 2018 — July 2022 • CGPA: 8.79',
+      highlights: [
+        'Strong foundation in algorithms, data structures, and software engineering',
+        'Worked on multiple web projects during studies',
+      ],
+    },
+  ];
+
   return (
-    <section id="education" className="py-16 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
-      <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            Education
-          </h2>
-          <div className="section-divider w-24 mx-auto mb-6"></div>
-        </div>
-        <ol className="relative border-l border-blue-200 dark:border-blue-700 ml-4">
-          <li className="mb-10 ml-6">
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow p-6 hover:shadow-lg transition card-hover">
-              <h3 className="font-bold text-lg text-blue-700 dark:text-blue-400 mb-1 flex items-center gap-2">
-                <i className="fa-solid fa-graduation-cap"></i> B.Tech — Computer
-                Science & Engineering
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-1">
-                Gandhi Engineering College (BPUT), Bhubaneswar
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 text-sm mb-1">
-                2018 — 2022 • CGPA: 8.79
-              </p>
-              <ul className="list-disc ml-5 text-gray-600 dark:text-gray-400 text-sm">
-                <li>
-                  Strong foundation in algorithms, data structures, and software
-                  engineering
-                </li>
-                <li>Worked on multiple web projects during studies</li>
-              </ul>
-            </div>
-          </li>
+    <section id="education" className="theme-section-alt py-20 px-4">
+      <div className="container mx-auto max-w-4xl">
+        <SectionHeader
+          index="02"
+          title="Education"
+          subtitle="Academic foundation and ongoing learning in artificial intelligence."
+        />
+        <ol className="relative border-l ml-4" style={{ borderColor: 'var(--border-strong)' }}>
+          {education.map((item) => (
+            <li key={item.degree} className="mb-10 ml-6">
+              <div className="theme-card rounded-2xl p-6 card-hover">
+                <h3 className="font-bold text-lg text-theme-accent mb-1 flex items-center gap-2">
+                  <i className="fa-solid fa-graduation-cap" aria-hidden="true" />
+                  {item.degree}
+                </h3>
+                <p className="text-theme-secondary mb-1">{item.institution}</p>
+                <p className="text-theme-muted text-sm mb-1">{item.period}</p>
+                <ul className="list-disc ml-5 text-theme-muted text-sm">
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -39,4 +56,3 @@ const Education = () => {
 };
 
 export default Education;
-

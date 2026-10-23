@@ -54,14 +54,21 @@ What would you like to know?`
   },
   projectsCount: {
     keywords: ['how many projects', 'number of projects', 'count of projects', 'total projects', 'how many works'],
-    answer: `Sourav has 6 featured projects:
+    answer: `Sourav has 10 featured projects:
 
-1. Chef Claude — AI-Powered Recipe Generator
-2. Meme Generator — Web App
-3. Roll Dice Tenzies — Interactive Game
-4. Inventos — Inventory Management Software
-5. My Travel Journey — Travel Project
-6. Covid-19 — Data Tracker`
+Professional:
+1. RADAR — Supply Chain Risk Intelligence
+2. ANNISE — Wealth Management Application
+3. PRICELEAP — Price Tracking Product
+4. Panasonic — Virtual Customer Service Chatbot
+
+Personal:
+5. Chef Claude — AI-Powered Recipe Generator
+6. Meme Generator — Web App
+7. Roll Dice Tenzies — Interactive Game
+8. Inventos — Inventory Management Software
+9. My Travel Journey — Travel Project
+10. Covid-19 — Data Tracker`
   },
   skills: {
     keywords: ['skill', 'skills', 'technologies', 'tech stack', 'what can you do', 'what do you know', 'what technologies', 'what tech'],
@@ -118,47 +125,58 @@ Frontend Developer — Lyearn (Jun 2020 – Mar 2021)
     keywords: ['project', 'projects', 'built', 'created', 'portfolio', 'work'],
     answer: `Sourav's featured projects:
 
-1. Chef Claude — AI-Powered Recipe Generator
+Professional Projects:
+1. RADAR — Supply Chain Risk Intelligence (React.js, Next.js, REST APIs, infinite scroll)
+2. ANNISE — Wealth Management Application (React.js, Next.js, RBAC, dashboards)
+3. PRICELEAP — Price Tracking Product (React.js, Node.js, Express.js, MongoDB, cron jobs)
+4. Panasonic — Virtual Customer Service Chatbot (React.js, TypeScript, REST APIs)
+
+Personal Projects:
+5. Chef Claude — AI-Powered Recipe Generator
 - Generates custom recipes based on ingredients using OpenRouter AI API
 - Technologies: React, OpenRouter API, Netlify
 - Demo: https://ai-chefclaude.netlify.app/
 
-2. Meme Generator — Web App
+6. Meme Generator — Web App
 - Dynamic meme generator with real-time templates
 - Technologies: React, JavaScript, Netlify
 - Demo: https://generate-trendingmemes.netlify.app/
 
-3. Roll Dice Tenzies — Interactive Game
+7. Roll Dice Tenzies — Interactive Game
 - Interactive dice game with React Hooks and accessibility features
 - Technologies: React.js, JavaScript
 - Demo: https://rolldice-tenzies.netlify.app/
 
-4. Inventos — Inventory Management Software
+8. Inventos — Inventory Management Software
 - Full-stack inventory management for manufacturing industry
 - Technologies: HTML5, CSS3, JavaScript, Python, Django
 - Demo: https://inventos.netlify.app/
 
-5. My Travel Journey — Travel Project
+9. My Travel Journey — Travel Project
 - React-based travel destination showcase
 - Technologies: React, JavaScript, Netlify
 - Demo: https://travel-with-myjourney.netlify.app/
 
-6. Covid-19 — Data Tracker
+10. Covid-19 — Data Tracker
 - Real-time COVID-19 data tracking for India
 - Technologies: HTML, CSS, JavaScript, API Integration
 - Demo: https://covid19-cowin.netlify.app/`
   },
   resume: {
     keywords: ['resume', 'cv', 'curriculum vitae', 'download resume', 'get resume', 'resume pdf', 'cv pdf', 'download cv'],
-    answer: `You can download Sourav Kumar's resume (CV) directly from the portfolio website. Look for the "Resume" button in the navigation menu at the top of the page. The resume is available as a PDF file named "Sourav Kumar Resume.pdf" and can be downloaded by clicking the Resume button.`
+    answer: `Sourav Kumar's resume is available as a PDF ("Sourav Kumar Resume.pdf"). In the Portfolio Assistant chat, ask for his resume or CV and use the Download Resume button in the reply to save the file directly.`
   },
   education: {
     keywords: ['education', 'educat', 'degree', 'qualification', 'qualifications', 'university', 'college', 'btech', 'b.tech', 'graduation', 'graduate', 'studied', 'study', 'cgpa', 'gpa'],
     answer: `Sourav Kumar's education:
 
+M.Tech — Artificial Intelligence
+- Institution: Indian Institute of Technology Jodhpur
+- Duration: 2026 — 2028
+
 B.Tech — Computer Science & Engineering
 - Institution: Gandhi Engineering College (BPUT), Bhubaneswar
-- Duration: 2018 — 2022
+- Duration: Aug 2018 — July 2022
 - CGPA: 8.79
 
 Key highlights:
@@ -174,7 +192,9 @@ PORTFOLIO INFORMATION:
 
 SKILLS (24 total): TypeScript, JavaScript, HTML5, CSS3, React.js, Next.js, Node.js, Express.js, Redux, React Bootstrap, MongoDB, PostgreSQL, Java, Python, GitHub, Git, Bitbucket, JSON, npm, Postman, Jira, Firebase, FastAPI, ServiceNow
 
-PROJECTS (6 featured): 
+PROJECTS (10 featured):
+Professional: RADAR (supply chain risk), ANNISE (wealth management), PRICELEAP (price tracking), Panasonic Virtual Customer Service Chatbot
+Personal:
 1. Chef Claude - AI-Powered Recipe Generator using OpenRouter AI API (React, Netlify) - https://ai-chefclaude.netlify.app/
 2. Meme Generator - Dynamic meme generator with real-time templates (React, JavaScript, Netlify) - https://generate-trendingmemes.netlify.app/
 3. Roll Dice Tenzies - Interactive dice game with React Hooks and accessibility (React.js, JavaScript) - https://rolldice-tenzies.netlify.app/
@@ -189,7 +209,8 @@ EXPERIENCE (4+ years):
 - Frontend Developer at Lyearn (Jun 2020-Mar 2021): Developed responsive and accessible UI components, converted Figma designs into production-ready React components
 
 EDUCATION:
-- B.Tech in Computer Science & Engineering from Gandhi Engineering College (BPUT), Bhubaneswar (2018-2022)
+- M.Tech in Artificial Intelligence from Indian Institute of Technology Jodhpur (2026-2028)
+- B.Tech in Computer Science & Engineering from Gandhi Engineering College (BPUT), Bhubaneswar (Aug 2018-July 2022)
 - CGPA: 8.79
 - Strong foundation in algorithms, data structures, and software engineering
 - Worked on multiple web projects during studies
@@ -230,7 +251,7 @@ RESPONSE STYLE:
 
 EXAMPLES OF GOOD AI RESPONSES:
 - "What are Sourav's skills?" → "Sourav has a strong technical skill set with 24 technologies! He's particularly strong in frontend development with React.js, Next.js, TypeScript, and JavaScript. On the backend, he works with Node.js, Express.js, MongoDB, and PostgreSQL. He also knows Java and Python, plus various tools like GitHub, Git, Firebase, and ServiceNow. Would you like to know more about any specific technology?"
-- "How many projects?" → "Sourav has built 6 featured projects! They range from AI-powered applications like Chef Claude (recipe generator) to interactive games like Roll Dice Tenzies, and even full-stack solutions like Inventos (inventory management). Each project showcases different aspects of his development skills."
+- "How many projects?" → "Sourav has 10 featured projects — 4 professional products (RADAR, ANNISE, PRICELEAP, Panasonic chatbot) and 6 personal builds like Chef Claude and Inventos. Each project showcases different aspects of his development skills."
 - "Tell me about his experience" → "Sourav has over 4 years of professional experience! He's currently a Software Developer at Aimleap, where he builds production-ready React applications. Before that, he was an Analyst at Capgemini and even won the ServiceNow Gen AI Hackathon 2024! He started his career as a Frontend Developer at Lyearn in 2020."
 - "What's his best project?" → "That's subjective, but Chef Claude is quite impressive - it's an AI-powered recipe generator that uses OpenRouter AI API. It shows his ability to integrate AI into web applications. The Inventos project is also notable as it's a full-stack inventory management system. Each project demonstrates different skills - would you like details on a specific one?"
 - "Does he know React?" → "Yes! React.js is one of Sourav's primary frontend technologies. He uses it extensively in his current role at Aimleap and has built multiple projects with it, including Chef Claude, Meme Generator, Roll Dice Tenzies, and My Travel Journey. He's quite experienced with React and modern JavaScript."

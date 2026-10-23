@@ -1,60 +1,63 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
+import EditorialCard from './EditorialCard';
+import { ReactIcon, Next, Node, Express, MongoDB, TypeScript, Redux } from '../assets/skills';
 
-const Expertise = () => {
-  const expertiseItems = [
-    {
-      icon: 'fa-laptop-code',
-      title: 'Frontend Engineering',
-      description: 'Building robust, accessible React applications with clean component architecture and strong UX focus.'
-    },
-    {
-      icon: 'fa-building',
-      title: 'Enterprise Solutions',
-      description: 'Developing and customizing enterprise applications on platforms like ServiceNow, focusing on workflow automation and user experience.'
-    },
-    {
-      icon: 'fa-users',
-      title: 'Product-minded Development',
-      description: 'Shipping features that solve user problems and align with business goals—prioritizing reliability and clarity.'
-    }
-  ];
+const expertiseAreas = [
+  {
+    index: '01',
+    title: 'Full-stack delivery',
+    description:
+      'End-to-end feature development across React/Next.js frontends, Node.js services, REST APIs, and databases — from UI to background jobs.',
+    footer: 'APIs · Data systems · Delivery engineering',
+    icons: [ReactIcon, Next, Node, Express, MongoDB],
+  },
+  {
+    index: '02',
+    title: 'Frontend architecture',
+    description:
+      'Scalable React applications with TypeScript, component-driven design, state management, and performance-focused UI patterns.',
+    footer: 'Design systems · State architecture · Developer tooling',
+    icons: [ReactIcon, TypeScript, Next, Redux],
+  },
+  {
+    index: '03',
+    title: 'AI-assisted development',
+    description:
+      'Using AI tools to accelerate delivery while maintaining engineering quality — integrating intelligent workflows into modern product experiences.',
+    footer: 'AI workflows · Product thinking · Rapid iteration',
+    icons: [ReactIcon, Node, TypeScript],
+  },
+];
 
-  return (
-    <section id="expertise" className="py-20 gradient-bg px-4 transition-colors duration-300">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            What I Do
-          </h2>
-          <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Frontend engineering, enterprise solutions, and building
-            user-focused products.
-          </p>
-        </div>
+const Expertise = () => (
+  <section id="expertise" className="theme-section py-20 px-4">
+    <div className="container mx-auto max-w-6xl">
+      <SectionHeader
+        index="06"
+        title="Expertise"
+        subtitle="The stack I reach for, and the practices around it."
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {expertiseItems.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg card-hover border border-gray-200 dark:border-gray-700 group"
-            >
-              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
-                <i className={`fa-solid ${item.icon} text-2xl text-purple-600 dark:text-purple-400`}></i>
-              </div>
-              <h3 className="font-playfair font-bold text-2xl mb-4 text-gray-800 dark:text-white">
-                {item.title}
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {item.description}
-              </p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {expertiseAreas.map((area) => (
+          <EditorialCard
+            key={area.index}
+            index={area.index}
+            title={area.title}
+            description={area.description}
+            footer={area.footer}
+          >
+            <div className="expertise-icon-row">
+              {area.icons.map((IconComponent, i) => (
+                <IconComponent key={i} className="expertise-stack-icon" aria-hidden="true" />
+              ))}
             </div>
-          ))}
-        </div>
+          </EditorialCard>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Expertise;
-

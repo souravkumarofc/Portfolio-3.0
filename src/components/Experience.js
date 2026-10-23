@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
 import aimleapLogo from '../assets/logos/aimleap_logo.jpeg';
 import capgeminiLogo from '../assets/logos/capgemini_logo.jpg';
 import worksbotLogo from '../assets/logos/worksbotapplications_logo.jpeg';
@@ -65,20 +66,19 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-16 bg-gray-50 dark:bg-gray-800 px-4 transition-colors duration-300">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            Work Experience
-          </h2>
-          <div className="section-divider w-24 mx-auto mb-6"></div>
-        </div>
+    <section id="experience" className="theme-section py-20 px-4">
+      <div className="container mx-auto max-w-5xl">
+        <SectionHeader
+          index="03"
+          title="Experience"
+          subtitle="Production engineering across product teams, enterprise platforms, and full-stack delivery."
+        />
 
         <div className="grid grid-cols-1 gap-8">
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow p-6 flex gap-4 hover:shadow-lg transition"
+              className="theme-card rounded-2xl p-6 flex gap-4 card-hover"
             >
               <div className={`flex-shrink-0 w-20 h-20 rounded-xl ${exp.logoBg} flex items-center justify-center border-2 ${exp.borderColor} p-2 shadow-sm overflow-hidden`}>
                 <img
@@ -100,17 +100,17 @@ const Experience = () => {
                 />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-blue-700 dark:text-blue-400 mb-1 flex items-center gap-2">
+                <h3 className="font-bold text-lg text-theme-accent mb-1 flex items-center gap-2">
                   <i className="fa-solid fa-briefcase"></i> {exp.title}
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-1">{exp.period}</p>
+                <p className="text-theme-secondary mb-1">{exp.period}</p>
                 {exp.companyDescription && (
-                  <p className="text-gray-600 dark:text-gray-400 mb-3 text-sm italic">{exp.companyDescription}</p>
+                  <p className="text-theme-muted mb-3 text-sm italic">{exp.companyDescription}</p>
                 )}
                 {exp.workHeading && (
-                  <p className="font-semibold text-gray-700 dark:text-gray-300 mb-2 text-sm">{exp.workHeading}</p>
+                  <p className="font-semibold text-theme-secondary mb-2 text-sm">{exp.workHeading}</p>
                 )}
-                <ul className="list-disc ml-5 text-gray-600 dark:text-gray-400 text-sm space-y-2">
+                <ul className="list-disc ml-5 text-theme-muted text-sm space-y-2">
                   {exp.points.map((point, i) => (
                     <li key={i} dangerouslySetInnerHTML={{ 
                       __html: point.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-800 dark:text-gray-200">$1</strong>')

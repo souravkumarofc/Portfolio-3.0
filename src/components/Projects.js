@@ -1,143 +1,153 @@
 import React from 'react';
+import SectionHeader from './SectionHeader';
+import TechMarquee from './TechMarquee';
 
-const Projects = () => {
-  const projects = [
-    {
-      image: '/images/chef.png',
-      title: 'Chef Claude — AI-Powered Recipe Generator',
-      description: 'A personal frontend project that generates custom recipes based on a list of ingredients using the OpenRouter AI API. Focuses on dynamic AI content generation, responsive design, and robust API handling.',
-      tags: ['React', 'OpenRouter API', 'Netlify'],
-      codeLink: 'https://github.com/souravkumarofc/ChefClaude',
-      demoLink: 'https://ai-chefclaude.netlify.app/'
-    },
-    {
-      image: '/images/meme.png',
-      title: 'Meme Generator — Web App',
-      description: 'A dynamic meme generator built with React and JavaScript that fetches real-time meme templates from an API and allows users to add custom text, download, and share their creations. This project showcases dynamic API handling and DOM manipulation with a focus on a responsive UI.',
-      tags: ['React', 'JavaScript', 'Netlify'],
-      codeLink: 'https://github.com/souravkumarofc/MemeGenerator',
-      demoLink: 'https://generate-trendingmemes.netlify.app/'
-    },
-    {
-      image: '/images/tenzies.png',
-      title: 'Roll Dice Tenzies — Interactive Game',
-      description: 'An interactive dice game built with React.js that challenges players to roll all ten dice until they all show the same number. It features state management with React Hooks, component-based rendering, and accessibility features like keyboard focus and screen reader support for an improved UX.',
-      tags: ['React.js', 'JavaScript', 'Component-Based Design'],
-      codeLink: 'https://github.com/souravkumarofc/Tenzies',
-      demoLink: 'https://rolldice-tenzies.netlify.app/'
-    },
-    {
-      image: '/images/Inventos.png',
-      title: 'Inventos — Inventory Management Software',
-      description: 'A full-stack project designed as a manufacturing industry inventory management software. It was built using a combination of frontend technologies like HTML5, CSS, and JavaScript, with a Python/Django backend.',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'Django'],
-      codeLink: 'https://github.com/souravkumarofc?tab=repositories',
-      demoLink: 'https://inventos.netlify.app/'
-    },
-    {
-      image: '/images/travel.png',
-      title: 'My Travel Journey — Portfolio Project',
-      description: 'A personal portfolio-style project built with React that showcases a collection of travel destinations. This application demonstrates the use of React components for structuring content and dynamic rendering of data from a local JSON file. Book your next travel destination with "Travel Journey".',
-      tags: ['React', 'JavaScript', 'Netlify'],
-      codeLink: 'https://github.com/souravkumarofc/travel_journey',
-      demoLink: 'https://travel-with-myjourney.netlify.app/'
-    },
-    {
-      image: '/images/covid-19.png',
-      title: 'Covid-19 — Data Tracker',
-      description: 'A web application that provides a real-time tracking of COVID-19 data, with a focus on India. The project integrates with public APIs to display statistics on confirmed cases, recoveries, and deaths, and may include features related to vaccine registration, such as the Co-WIN platform.',
-      tags: ['HTML', 'CSS', 'JavaScript', 'API Integration'],
-      codeLink: 'https://github.com/souravkumarofc',
-      demoLink: 'https://covid19-cowin.netlify.app/'
-    }
-  ];
+const professionalProjects = [
+  {
+    title: 'RADAR — Supply Chain Risk Intelligence',
+    description:
+      'Engineered React.js/Next.js workflows for supplier risk, network analysis, alerts, risk scores, and interactive visualizations across core risk-analysis API workflows. Implemented offset-based pagination and infinite scrolling for large datasets.',
+    tags: ['React.js', 'Next.js', 'REST APIs', 'Infinite Scroll', 'Data Visualization'],
+  },
+  {
+    title: 'ANNISE — Wealth Management Application',
+    description:
+      'Developed React.js/Next.js features for dashboards, financial data workflows, and user-specific experiences within a wealth-management platform. Implemented RBAC to control feature and data visibility across permissions.',
+    tags: ['React.js', 'Next.js', 'RBAC', 'Dashboards', 'FinTech'],
+  },
+  {
+    title: 'PRICELEAP — Price Tracking Product',
+    description:
+      'Contributed across React.js, Node.js, Express.js, and MongoDB. Designed cron-based background job scheduling to automate recurring workflows and built asynchronous API-driven processes decoupled from user-facing operations.',
+    tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Cron Jobs'],
+  },
+  {
+    title: 'Panasonic — Virtual Customer Service Chatbot',
+    description:
+      'Built enterprise interfaces with React.js, JavaScript, and TypeScript for Panasonic Singapore. Integrated a virtual customer service chatbot with backend services and external REST APIs, improving internal query resolution efficiency by 40%.',
+    tags: ['React.js', 'TypeScript', 'REST APIs', 'Chatbot', 'Enterprise'],
+  },
+];
 
-  return (
-    <section id="projects" className="py-20 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            Featured Projects
-          </h2>
-          <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            A selection of projects that highlight my frontend and full-stack
-            capabilities.
-          </p>
-        </div>
+const personalProjects = [
+  {
+    title: 'Chef Claude — AI-Powered Recipe Generator',
+    description:
+      'Generates custom recipes from ingredients using the OpenRouter AI API, with responsive UI and robust API handling.',
+    tags: ['React', 'OpenRouter API', 'Netlify'],
+    codeLink: 'https://github.com/souravkumarofc/ChefClaude',
+    demoLink: 'https://ai-chefclaude.netlify.app/',
+  },
+  {
+    title: 'Meme Generator — Web App',
+    description:
+      'Fetches real-time meme templates and lets users add custom text, download, and share creations.',
+    tags: ['React', 'JavaScript', 'Netlify'],
+    codeLink: 'https://github.com/souravkumarofc/MemeGenerator',
+    demoLink: 'https://generate-trendingmemes.netlify.app/',
+  },
+  {
+    title: 'Roll Dice Tenzies — Interactive Game',
+    description:
+      'Interactive dice game with React Hooks, component-based rendering, and accessibility features.',
+    tags: ['React.js', 'JavaScript'],
+    codeLink: 'https://github.com/souravkumarofc/Tenzies',
+    demoLink: 'https://rolldice-tenzies.netlify.app/',
+  },
+  {
+    title: 'Inventos — Inventory Management Software',
+    description:
+      'Full-stack inventory management for manufacturing with JavaScript frontend and Python/Django backend.',
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'Django'],
+    codeLink: 'https://github.com/souravkumarofc?tab=repositories',
+    demoLink: 'https://inventos.netlify.app/',
+  },
+  {
+    title: 'My Travel Journey — Portfolio Project',
+    description:
+      'React-based travel showcase using component architecture and JSON-driven content.',
+    tags: ['React', 'JavaScript', 'Netlify'],
+    codeLink: 'https://github.com/souravkumarofc/travel_journey',
+    demoLink: 'https://travel-with-myjourney.netlify.app/',
+  },
+  {
+    title: 'Covid-19 — Data Tracker',
+    description:
+      'Real-time COVID-19 tracking for India using public APIs for cases, recoveries, and deaths.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'API Integration'],
+    codeLink: 'https://github.com/souravkumarofc',
+    demoLink: 'https://covid19-cowin.netlify.app/',
+  },
+];
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden card-hover group"
-            >
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/40 dark:to-purple-800/40 flex items-center justify-center h-56">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  draggable="false"
-                  loading="lazy"
-                  className="object-contain h-full w-full p-4 group-hover:scale-105 transition-transform duration-300"
-                  style={{
-                    userSelect: 'none',
-                    WebkitUserSelect: 'none',
-                    MozUserSelect: 'none',
-                    msUserSelect: 'none'
-                  }}
-                  onDragStart={(e) => e.preventDefault()}
-                  onContextMenu={(e) => e.preventDefault()}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-purple-600 dark:text-purple-400"><i class="fa-solid fa-image text-4xl"></i></div>';
-                  }}
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="font-playfair font-bold text-xl mb-3 text-gray-800 dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-4">
-                  <a
-                    href={project.codeLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-700 hover:text-white transition-all duration-300 font-semibold"
-                  >
-                    <i className="fa-solid fa-code"></i>
-                    <span>Code</span>
-                  </a>
-                  <a
-                    href={project.demoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg bg-purple-600 dark:bg-purple-700 text-white hover:bg-purple-700 dark:hover:bg-purple-800 transition-all duration-300 font-semibold"
-                  >
-                    <i className="fa-solid fa-rocket"></i>
-                    <span>Live Demo</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+const ProjectCard = ({ project }) => (
+  <article className="theme-card rounded-2xl p-6 md:p-8 card-hover h-full flex flex-col">
+    <h3 className="font-playfair font-bold text-xl mb-3 text-theme-primary">{project.title}</h3>
+    <p className="text-theme-secondary mb-5 leading-relaxed flex-grow">{project.description}</p>
+    <div className="flex flex-wrap gap-2 mb-6">
+      {project.tags.map((tag) => (
+        <span key={tag} className="tag-pill text-sm">{tag}</span>
+      ))}
+    </div>
+    {(project.codeLink || project.demoLink) && (
+      <div className="flex flex-wrap gap-3 mt-auto">
+        {project.codeLink && (
+          <a
+            href={project.codeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-editorial-secondary !py-2.5 !px-4 text-sm"
+          >
+            <i className="fa-solid fa-code" aria-hidden="true" />
+            Code
+          </a>
+        )}
+        {project.demoLink && (
+          <a
+            href={project.demoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-editorial-primary !py-2.5 !px-4 text-sm"
+          >
+            <i className="fa-solid fa-rocket" aria-hidden="true" />
+            Live Demo
+          </a>
+        )}
+      </div>
+    )}
+  </article>
+);
+
+const Projects = () => (
+  <section id="projects" className="theme-section-alt py-20 px-4">
+    <div className="container mx-auto max-w-6xl">
+      <SectionHeader
+        index="05"
+        title="Projects"
+        subtitle="Professional products from industry work and personal builds that showcase full-stack delivery."
+      />
+
+      <TechMarquee className="mb-14" />
+
+      <div className="mb-14">
+        <h3 className="text-2xl font-playfair font-bold text-theme-primary mb-6">Professional Projects</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {professionalProjects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
           ))}
         </div>
       </div>
-    </section>
-  );
-};
+
+      <div>
+        <h3 className="text-2xl font-playfair font-bold text-theme-primary mb-6">Personal Projects</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {personalProjects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default Projects;
-

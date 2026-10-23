@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import SectionHeader from './SectionHeader';
+
+const EMAIL = 'souravkumarjsr01@gmail.com';
+const LINKEDIN = 'https://www.linkedin.com/in/souravkumarofc/';
+const GITHUB = 'https://github.com/souravkumarofc/';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formMessage, setFormMessage] = useState({ text: '', type: '' });
 
-  // Initialize EmailJS
-  React.useEffect(() => {
+  useEffect(() => {
     emailjs.init({
-      publicKey: "IT2nU9R5nZ7Ld7NoV",
+      publicKey: 'IT2nU9R5nZ7Ld7NoV',
     });
   }, []);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -42,7 +46,6 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       showMessage('Please fill in all required fields.', 'error');
       return;
@@ -57,211 +60,162 @@ const Contact = () => {
     setFormMessage({ text: '', type: '' });
 
     try {
-      const response = await emailjs.send(
-        "service_kczxhb9",
-        "template_sfwtnju",
-        {
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          title: formData.subject.trim() || 'Portfolio Contact Form',
-          message: formData.message.trim()
-        }
-      );
+      const response = await emailjs.send('service_kczxhb9', 'template_sfwtnju', {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        title: formData.subject.trim() || 'Portfolio Contact Form',
+        message: formData.message.trim(),
+      });
 
-      console.log('SUCCESS!', response.status, response.text);
-      showMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('SUCCESS!', response.status, response.text);
+      }
+      showMessage("Thank you for your message! I'll get back to you soon.", 'success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      console.log('FAILED...', error);
-      showMessage('Sorry, there was an error sending your message. Please try again or contact me directly.', 'error');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('FAILED...', error);
+      }
+      showMessage(
+        'Sorry, there was an error sending your message. Please try again or contact me directly.',
+        'error'
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-gray-900 px-4 transition-colors duration-300">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-gray-800 dark:text-white">
-            Hire Me
-          </h2>
-          <div className="section-divider w-24 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Let's discuss your next project
-          </p>
-        </div>
+    <section id="contact" className="contact-section theme-section py-20 md:py-28 px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+          <div className="lg:col-span-5 contact-intro">
+            <SectionHeader
+              index="09"
+              title="Let's talk"
+              subtitle="Open to roles, collaborations, and thoughtful engineering conversations."
+              align="left"
+            />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="What's this about?"
-                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project or inquiry..."
-                  className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-purple-600 text-white p-4 rounded-xl shadow-lg hover:bg-purple-700 hover:shadow-xl transition-all duration-300 font-semibold text-lg disabled:opacity-70 disabled:cursor-not-allowed"
+            <figure className="contact-intro-photo">
+              <img
+                src="/images/new_pic.png"
+                alt="Portrait of Sourav Kumar, Software Developer"
+                width={120}
+                height={120}
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+              />
+              <figcaption className="contact-intro-caption text-theme-muted">
+                Sourav Kumar · Software Developer
+              </figcaption>
+            </figure>
+
+            <div className="contact-quick-links">
+              <a href={`mailto:${EMAIL}`} className="btn-editorial-primary contact-email-cta">
+                <i className="fa-solid fa-envelope" aria-hidden="true" />
+                Email me
+              </a>
+              <a
+                href={LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-editorial-secondary contact-social-pill"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-              {formMessage.text && (
-                <div
-                  className={`form-message mt-4 p-3 rounded-xl text-center ${
-                    formMessage.type === 'success'
-                      ? 'bg-green-100 text-green-700 border border-green-200'
-                      : 'bg-red-100 text-red-700 border border-red-200'
-                  }`}
-                >
-                  {formMessage.text}
-                </div>
-              )}
-            </form>
+                <i className="fa-brands fa-linkedin" aria-hidden="true" />
+                LinkedIn
+              </a>
+              <a
+                href={GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-editorial-secondary contact-social-pill"
+              >
+                <i className="fa-brands fa-github" aria-hidden="true" />
+                GitHub
+              </a>
+            </div>
           </div>
 
-          <div className="space-y-8">
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-              <h3 className="font-playfair font-bold text-2xl mb-6 text-gray-800 dark:text-white">
-                Get In Touch
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                Ready to start your next project? I'd love to hear from you.
-                Let's create something amazing together.
-              </p>
+          <div className="lg:col-span-7">
+            <div className="contact-form-card theme-card">
+              <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                <div className="contact-field">
+                  <label htmlFor="name">Name *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="email">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="your.email@example.com"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="subject">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="What would you like to talk about?"
+                  />
+                </div>
+                <div className="contact-field contact-field--message">
+                  <label htmlFor="message">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project, role, or idea..."
+                    rows={5}
+                    required
+                  />
+                </div>
 
-              <div className="space-y-6">
-                <a
-                  href="mailto:souravkumarjsr01@gmail.com"
-                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
-                    <i className="fa-solid fa-envelope text-purple-600 dark:text-purple-400"></i>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      souravkumarjsr01@gmail.com
-                    </p>
-                  </div>
-                </a>
+                <div className="contact-form-actions">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-editorial-primary contact-submit-btn w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </div>
 
-                <a
-                  href="https://www.linkedin.com/in/souravkumarofc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
-                    <i className="fa-brands fa-linkedin text-purple-600 dark:text-purple-400"></i>
+                {formMessage.text && (
+                  <div
+                    className={`contact-form-feedback form-message ${
+                      formMessage.type === 'success'
+                        ? 'contact-form-feedback--success'
+                        : 'contact-form-feedback--error'
+                    }`}
+                    role="status"
+                  >
+                    {formMessage.text}
                   </div>
-                  <div>
-                    <p className="font-semibold">LinkedIn</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Connect with me</p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://github.com/souravkumarofc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
-                    <i className="fa-brands fa-github text-purple-600 dark:text-purple-400"></i>
-                  </div>
-                  <div>
-                    <p className="font-semibold">GitHub</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      View my repositories
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://x.com/souravkumarofc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 group"
-                >
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-800/70 transition-colors duration-300">
-                    <i className="fa-brands fa-x-twitter text-purple-600 dark:text-purple-400"></i>
-                  </div>
-                  <div>
-                    <p className="font-semibold">X (Twitter)</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Tech thoughts & updates
-                    </p>
-                  </div>
-                </a>
-              </div>
+                )}
+              </form>
             </div>
           </div>
         </div>
@@ -271,4 +225,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

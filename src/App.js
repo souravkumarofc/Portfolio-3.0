@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -6,62 +7,59 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import HonorsAndAwards from './components/HonorsAndAwards';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
 import Expertise from './components/Expertise';
+import HowIWork from './components/HowIWork';
+import OpenTo from './components/OpenTo';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AIChatbot from './components/AIChatbot';
-import { useScrollReveal } from './hooks/useScrollReveal';
 import './App.css';
 
-function App() {
-  useScrollReveal();
+const AIChatbot = lazy(() => import('./components/AIChatbot'));
+
+function DeferredChatbot() {
+  const [mount, setMount] = useState(false);
 
   useEffect(() => {
-    // Navbar shadow on scroll - optimized with requestAnimationFrame
-    let ticking = false;
-    const navbar = document.querySelector('header');
-    
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (navbar) {
-            if (window.scrollY > 10) {
-              navbar.classList.add('navbar-scrolled');
-            } else {
-              navbar.classList.remove('navbar-scrolled');
-            }
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+    const schedule = () => setMount(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(schedule, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(schedule, 2000);
+    return () => window.clearTimeout(t);
   }, []);
 
+  if (!mount) {
+    return null;
+  }
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-inter scroll-smooth">
-      <Header />
+    <Suspense fallback={null}>
+      <AIChatbot />
+    </Suspense>
+  );
+}
+
+function App() {
+  const { isDark, toggleTheme } = useTheme();
+
+  return (
+    <div className="min-h-screen font-inter theme-page">
+      <Header isDark={isDark} onToggleTheme={toggleTheme} />
       <Hero />
       <About />
       <Education />
       <Experience />
       <HonorsAndAwards />
       <Projects />
-      <Skills />
       <Expertise />
+      <HowIWork />
+      <OpenTo />
       <Contact />
       <Footer />
-      <AIChatbot />
+      <DeferredChatbot />
     </div>
   );
 }
 
 export default App;
-

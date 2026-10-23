@@ -1,261 +1,129 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSmoothScroll } from '../hooks/useSmoothScroll';
+import { usePageScroll } from '../hooks/usePageScroll';
+import ThemeToggle from './ThemeToggle';
 
-const Header = () => {
+// Order matches page scroll order in App.js
+const NAV_ITEMS = [
+  { href: '#about', id: 'about', label: 'About' },
+  { href: '#education', id: 'education', label: 'Education' },
+  { href: '#experience', id: 'experience', label: 'Experience' },
+  { href: '#honors-awards', id: 'honors-awards', label: 'Awards' },
+  { href: '#projects', id: 'projects', label: 'Projects' },
+  { href: '#expertise', id: 'expertise', label: 'Expertise' },
+  { href: '#how-i-work', id: 'how-i-work', label: 'How I Work' },
+  { href: '#open-to', id: 'open-to', label: 'Open To' },
+  { href: '#contact', id: 'contact', label: 'Hire Me' },
+];
+
+const NAV_SECTION_IDS = NAV_ITEMS.map((item) => item.id);
+
+function Header({ isDark, onToggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const shellRef = useRef(null);
+  const progressRef = useRef(null);
   useSmoothScroll();
+  usePageScroll(shellRef, progressRef, NAV_SECTION_IDS);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Close menu when clicking on a link
   useEffect(() => {
     const handleLinkClick = () => {
-      if (isMenuOpen) {
-        setTimeout(() => setIsMenuOpen(false), 100);
-      }
+      if (isMenuOpen) setTimeout(closeMenu, 100);
     };
 
     const links = document.querySelectorAll('#mobile-menu a[href^="#"]');
-    links.forEach(link => link.addEventListener('click', handleLinkClick));
-
-    return () => {
-      links.forEach(link => link.removeEventListener('click', handleLinkClick));
-    };
+    links.forEach((link) => link.addEventListener('click', handleLinkClick));
+    return () => links.forEach((link) => link.removeEventListener('click', handleLinkClick));
   }, [isMenuOpen]);
 
   return (
     <>
-      <header className="w-full bg-white shadow-sm z-50 top-0 border-b border-gray-200 fixed">
-        <nav className="container mx-auto flex flex-row justify-between items-center py-4 px-4 md:px-6">
-          <div className="text-2xl font-playfair font-bold text-primary tracking-tight">
-            Sourav Kumar
-          </div>
-          <div className="md:hidden flex items-center gap-3">
+      <div ref={shellRef} className="editorial-nav-shell">
+        <div className="editorial-nav-backdrop" aria-hidden="true" />
+        <div className="editorial-nav-inner">
+          <a href="#hero" className="editorial-brand" aria-label="Sourav Kumar home">
+            <span className="editorial-brand-mark" aria-hidden="true">&lt;SK/&gt;</span>
+            <span className="editorial-brand-name">Sourav Kumar</span>
+          </a>
+
+          <nav className="editorial-nav-pill" aria-label="Primary">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                data-nav-section={item.id}
+                className="editorial-nav-link"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2 pointer-events-auto">
+            <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
+            <a
+              href="/Sourav%20Kumar%20Resume.pdf"
+              download="Sourav Kumar Resume.pdf"
+              className="hidden md:inline-flex btn-editorial-secondary text-sm !py-2 !px-4"
+            >
+              <i className="fa-solid fa-file-arrow-down" aria-hidden="true" />
+              Resume
+            </a>
             <button
-              id="mobile-menu-button"
-              className="mobile-menu-button text-gray-700"
+              type="button"
+              className="mobile-menu-button theme-toggle lg:hidden"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                ></path>
-              </svg>
+              <i className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars'}`} aria-hidden="true" />
             </button>
           </div>
-          <div id="nav-content" className="desktop-nav overflow-x-auto scrollbar-hide">
-            <ul className="flex flex-row space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center min-w-max">
-              <li className="flex-shrink-0">
-                <a
-                  href="#hero"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Home
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#about"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  About
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#education"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Education
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#experience"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Experience
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#honors-awards"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  <span className="hidden sm:inline">Honors & Awards</span>
-                  <span className="sm:hidden">Awards</span>
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#projects"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Projects
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#skills"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Skills
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="#contact"
-                  className="px-2 sm:px-3 py-2 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-300 font-medium text-sm sm:text-base whitespace-nowrap text-gray-700"
-                >
-                  Hire Me
-                </a>
-              </li>
-              <li className="flex-shrink-0">
-                <a
-                  href="/Sourav%20Kumar%20Resume.pdf"
-                  download="Sourav Kumar Resume.pdf"
-                  className="resume-button px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 whitespace-nowrap"
-                >
-                  <i className="fa-solid fa-file-arrow-down"></i>
-                  <span>Resume</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+        </div>
+        <div className="editorial-scroll-track" aria-hidden="true">
+          <div ref={progressRef} className="editorial-scroll-fill" />
+        </div>
+        <div className="editorial-nav-scrim" aria-hidden="true" />
+      </div>
 
       <div
         id="mobile-menu-overlay"
         className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`}
         onClick={closeMenu}
-      ></div>
+      />
       <div id="mobile-menu" className={`off-canvas-menu ${isMenuOpen ? 'active' : ''}`}>
-        <button
-          id="close-menu-btn"
-          className="close-menu-btn"
-          onClick={closeMenu}
-          aria-label="Close menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+        <button type="button" className="close-menu-btn theme-toggle" onClick={closeMenu} aria-label="Close menu">
+          <i className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
-        <ul className="flex flex-col space-y-4 px-6 text-xl">
-          <li>
-            <a
-              href="#hero"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="#about"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href="#education"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Education
-            </a>
-          </li>
-          <li>
-            <a
-              href="#experience"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Experience
-            </a>
-          </li>
-          <li>
-            <a
-              href="#honors-awards"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Honors & Awards
-            </a>
-          </li>
-          <li>
-            <a
-              href="#projects"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Projects
-            </a>
-          </li>
-          <li>
-            <a
-              href="#skills"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Skills
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              className="block py-2 hover:text-accent transition-colors duration-300"
-              onClick={closeMenu}
-            >
-              Hire Me
-            </a>
-          </li>
+        <ul className="flex flex-col space-y-2 px-6 text-lg mt-12">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.id}>
+              <a
+                href={item.href}
+                data-nav-section={item.id}
+                className="block py-2 editorial-nav-link !rounded-xl"
+                onClick={closeMenu}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
           <li>
             <a
               href="/Sourav%20Kumar%20Resume.pdf"
               download="Sourav Kumar Resume.pdf"
-              className="resume-button mt-4 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold flex items-center gap-2 justify-center"
+              className="btn-editorial-primary mt-4 w-full"
+              onClick={closeMenu}
             >
-              <i className="fa-solid fa-file-arrow-down"></i>
-              <span>Resume</span>
+              <i className="fa-solid fa-file-arrow-down" aria-hidden="true" />
+              Resume
             </a>
           </li>
         </ul>
       </div>
     </>
   );
-};
+}
 
-export default Header;
-
+export default React.memo(Header);

@@ -200,7 +200,7 @@ const FloatingChatButton = forwardRef(({ onClick, isOpen }, ref) => {
           setIsHovering(false);
         }
       }}
-      className={`chat-button-responsive z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-2xl hover:bg-purple-700 transition-all duration-300 flex items-center justify-center overflow-visible focus:outline-none focus:ring-0 active:bg-purple-600 active:scale-95`}
+      className="chat-button-responsive z-50 w-14 h-14 rounded-full flex items-center justify-center overflow-visible focus:outline-none focus:ring-0 active:scale-95"
       style={{
         ...buttonStyle,
         position: 'fixed',
@@ -220,15 +220,15 @@ const FloatingChatButton = forwardRef(({ onClick, isOpen }, ref) => {
           <i className="fa-solid fa-chevron-down text-xl text-white absolute transition-all duration-300 ease-out"></i>
         ) : imageError ? (
           <i className={`fa-solid fa-robot text-2xl text-white absolute transition-all duration-300 ease-out ${
-            isHovering ? 'animate-hover-bounce' : 'animate-smooth-bounce'
+            isHovering ? 'animate-hover-bounce' : 'chat-idle-float'
           }`}></i>
         ) : (
           <img 
             src="/images/chatbot.png" 
             alt="Chat" 
             draggable="false"
-            className={`rounded-full object-cover logo-3d absolute transition-all duration-300 ease-out ${
-              isHovering ? 'animate-hover-bounce' : 'animate-smooth-bounce'
+            className={`rounded-full object-cover chatbot-avatar absolute transition-all duration-300 ease-out ${
+              isHovering ? 'animate-hover-bounce' : 'chat-idle-float'
             }`}
             style={{
               width: '110px',
