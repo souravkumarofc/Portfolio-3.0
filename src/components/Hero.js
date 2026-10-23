@@ -33,10 +33,8 @@ const Hero = () => (
         <p className="text-base md:text-lg text-theme-muted leading-relaxed mb-8 max-w-2xl">
           Software Developer at Aimleap with 4+ years of experience across React, Next.js, TypeScript,
           Node.js, and REST APIs—shipping production features for wealth management, supply chain, and
-          enterprise platforms while pursuing{' '}
-          <strong className="font-semibold text-theme-secondary">
-            M.Tech in Artificial Intelligence at IIT Jodhpur.
-          </strong>
+          enterprise platforms while pursuing M.Tech in Artificial Intelligence at{' '}
+          <strong className="font-semibold text-theme-secondary">IIT Jodhpur</strong>.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
