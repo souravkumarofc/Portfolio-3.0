@@ -1,4 +1,5 @@
 import React from 'react';
+import EditorialBrandMark from './EditorialBrandMark';
 
 const EMAIL = 'souravkumarjsr01@gmail.com';
 const LINKEDIN = 'https://www.linkedin.com/in/souravkumarofc/';
@@ -65,7 +66,7 @@ const Footer = () => {
           <div className="footer-top">
             <div className="footer-brand-block">
               <a href="#hero" className="footer-brand" aria-label="Sourav Kumar home">
-                <span className="footer-brand-mark" aria-hidden="true">&lt;SK/&gt;</span>
+                <EditorialBrandMark />
                 <span className="footer-brand-name">Sourav Kumar</span>
               </a>
               <p className="footer-tagline">

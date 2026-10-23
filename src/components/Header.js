@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSmoothScroll } from '../hooks/useSmoothScroll';
 import { usePageScroll } from '../hooks/usePageScroll';
 import ThemeToggle from './ThemeToggle';
+import EditorialBrandMark from './EditorialBrandMark';
 
 // Order matches page scroll order in App.js
 const NAV_ITEMS = [
@@ -44,7 +45,7 @@ function Header({ isDark, onToggleTheme }) {
         <div className="editorial-nav-backdrop" aria-hidden="true" />
         <div className="editorial-nav-inner">
           <a href="#hero" className="editorial-brand" aria-label="Sourav Kumar home">
-            <span className="editorial-brand-mark" aria-hidden="true">&lt;SK/&gt;</span>
+            <EditorialBrandMark />
             <span className="editorial-brand-name">Sourav Kumar</span>
           </a>
 
