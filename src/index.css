@@ -292,7 +292,7 @@ button:disabled {
 
 .editorial-scroll-track {
   pointer-events: none;
-  max-width: 72rem;
+  max-width: 88rem;
   margin: 0.65rem auto 0;
   padding: 0 1rem;
   height: 3px;
@@ -312,7 +312,8 @@ button:disabled {
 
 .editorial-nav-inner {
   pointer-events: auto;
-  max-width: 72rem;
+  max-width: 88rem;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -377,6 +378,20 @@ button:disabled {
 @media (min-width: 1024px) {
   .editorial-nav-pill {
     display: flex;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .editorial-nav-link {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  .editorial-nav-pill {
+    gap: 0.15rem;
+    padding: 0.28rem;
   }
 }
 
@@ -729,10 +744,9 @@ button:disabled {
   visibility: visible;
 }
 
-.close-menu-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+.mobile-menu-list {
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
 }
 
 @media (max-width: 767px) {
@@ -790,12 +804,67 @@ button:disabled {
 }
 
 @media (min-width: 1024px) {
-  .mobile-menu-button {
-    display: none;
+  .editorial-nav-shell {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .editorial-nav-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    align-items: center;
   }
 
   .editorial-brand {
-    flex: 0 1 auto;
+    flex: none;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+    padding-right: 0.35rem;
+  }
+
+  .editorial-nav-pill {
+    justify-self: center;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .editorial-nav-actions {
+    margin-left: 0;
+    justify-self: end;
+  }
+
+  .mobile-menu-button {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .editorial-nav-inner {
+    column-gap: 1.35rem;
+  }
+
+  .editorial-nav-link {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.88rem;
+  }
+}
+
+/* Not enough width for pill + brand + actions — keep drawer nav */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .editorial-nav-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .editorial-nav-pill {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
   }
 }
 

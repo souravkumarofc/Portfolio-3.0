@@ -95,10 +95,7 @@ function Header({ isDark, onToggleTheme }) {
         onClick={closeMenu}
       />
       <div id="mobile-menu" className={`off-canvas-menu ${isMenuOpen ? 'active' : ''}`}>
-        <button type="button" className="close-menu-btn theme-toggle" onClick={closeMenu} aria-label="Close menu">
-          <i className="fa-solid fa-xmark" aria-hidden="true" />
-        </button>
-        <ul className="flex flex-col space-y-2 px-6 text-lg mt-12">
+        <ul className="flex flex-col space-y-2 px-6 text-lg mobile-menu-list">
           {NAV_ITEMS.map((item) => (
             <li key={item.id}>
               <a
