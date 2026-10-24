@@ -62,21 +62,22 @@ function Header({ isDark, onToggleTheme }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 pointer-events-auto">
+          <div className="editorial-nav-actions pointer-events-auto">
             <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
             <a
               href="/Sourav%20Kumar%20Resume.pdf"
               download="Sourav Kumar Resume.pdf"
-              className="hidden md:inline-flex btn-editorial-secondary text-sm !py-2 !px-4"
+              className="editorial-nav-resume hidden lg:inline-flex btn-editorial-secondary text-sm !py-2 !px-4"
             >
               <i className="fa-solid fa-file-arrow-down" aria-hidden="true" />
               Resume
             </a>
             <button
               type="button"
-              className="mobile-menu-button theme-toggle lg:hidden"
+              className="mobile-menu-button theme-toggle"
               onClick={toggleMenu}
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               <i className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars'}`} aria-hidden="true" />
             </button>
